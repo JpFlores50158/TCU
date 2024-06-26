@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <div class="container my-5">
+            <div class="row"> 
+                <div class="col-md-8 col-md-offset-3">
+                    
+                    <div class="card" style="background-color:lightblue;">
+                        <div style="color:white;margin-left: 2%"class="m-2"><h2>[[#{iniciosesion}]]</h2></div>
+                        <div class="card-body mb-5">
+                            <form method="POST" th:action="@{/login}">
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="username"><i class="fas fa-user-lock" style="margin-right: 15px"></i>[[#{login.nombreUsuario}]] </label>
+                                    <div class="col-md-7 my-auto">
+                                        <input class="form-control" type="text" name="username" id="username"/></div></div>
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="password"><i class="fas fa-key" style="margin-right: 15px"></i>[[#{login.password}]] </label>
+                                    <div class="col-md-7 my-auto"><input class="form-control" type="password" name="password" id="password"/></div></div>
+                                <hr style="margin-top: 40px; color: white">
+                                    <div class="card-footer col text-center">
+                                      
+                                        <button class="btn btn-success" type="submit">
+                                            <span class="btn text-white"><i class="fas fa-sign-in-alt" style="margin-right: 5px"><strong></i> [[#{login.ingresar}]] </span></strong></button>
+                                    </div>
+                            </form>                            
+                        </div>
+                    </div>
+                    <div th:if="${param.error != null}">
+                        <h3> [[#{login.credencialesError}]] </h3>
+                    </div>
+                </div>
+                               
+            </div>    
+            <footer style="  height: 8%; position: absolute;width: 100%;left:0;bottom: 0;background-color: #d1b3ff; display: inline-flex; text-align: center; align-items: center;" class=" text-white mt-5 p-2">
+                <div  class="container">
+                    <div class="col">
+                        <p class=" m-0 lead text-center">
+                            &COPY; [[#{plantilla.derechos}]]
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </body>
+</html>

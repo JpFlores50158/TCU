@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:fragment="head">
+        <title>ABIPAM</title>
+        <link rel="icon" href="../images/logo.png">
+            <meta charset="UTF-8"/>
+            <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+            <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"/>
+            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+
+            <style>
+                /* Estilo para todos los elementos nav-item */
+                .nav-item {
+                    font-family: Arial, sans-serif; /* Cambia este valor al tipo de letra deseado */
+                }
+
+                #spamheader {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+
+                body {
+                    background-color: #fffce5;
+                }
+
+                .figura {
+                    position: relative;
+                    display: inline-block;
+                    margin: 20px;
+                }
+
+                .botonImagen {
+                    width: 180px;
+                    height: 70px;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border: none;
+                    background-color: rgba(255, 255, 255, 0.35);
+                    font-weight: bold;
+                    font-size: 25px;
+                }
+
+                .botonImagen:hover {
+                    background-color: white;
+                    width: 200px;
+                    height: 90px;
+                    font-size: 30px;
+                    transition: 0.5s;
+                }
+
+                #dvImagenes {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                #blurImagen {
+                    filter: blur(1.5px);
+                }
+
+                .filtro {
+                    font-size: 20px;
+                }
+
+                .filtro:hover {
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+
+                .auth-buttons {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .auth-buttons .nav-item {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+
+            </style>
+
+
+    </head>
+    <body>
+        <header class="header" style="background-color:  peru; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);padding:1% 0;">
+            <div class="container-fluid d-flex justify-content-between align-items-center"> 
+
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-sm" >
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <a href="/"  style="display:flex;align-content: center;flex-wrap: wrap" class="navbar-brand text-white">
+                                <h3 class="mb-5">ABIPAM</h3>
+                            </a>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                                <ul class="navbar-nav">
+
+                                    <li class="nav-item px-2" sec:authorize="isAuthenticated()">
+                                        <a class="nav-link" href="/beneficiado/listado"><span>Beneficados</span></a>
+                                    </li>
+
+
+
+                                    <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <a class="nav-link" href="/admin/usuarios/listado"><span>Usuarios</span></a>
+                                    </li>
+
+                                </ul>
+                                <!-- Botones de autenticación -->
+                                <div class="auth-buttons ml-auto">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                                            <a class="nav-link" href="/login"><span>Ingresar</span></a>
+                                        </li>
+                                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                                            <form method="POST"th:action="@{/logout}">
+                                                <button type="submit" class="btn btn-link nav-link"><span>Salir</span></button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown text-center">
+                                            <div class="d-flex" sec:authorize="isAuthenticated()">
+                                                <a class="nav-link" href="/perfil/mostrar"><i class="fa-solid fa-circle-user fa-lg" style="margin-right: 20px;"></i></a>
+                                                <span class="nav-link" style="color:white;"><span sec:authentication="name">Username</span></span>
+                                            </div>
+
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+
+        <section th:fragment="contenido" style="overflow: auto;" >
+
+
+        </section>
+        <footer style="width: 100%;background-color: #d1b3ff" class=" text-white mt-5 p-2">
+            <div  class="container">
+                <div class="col">
+                    <p class=" m-0 lead text-center">
+                        &COPY; [[#{plantilla.derechos}]]
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>

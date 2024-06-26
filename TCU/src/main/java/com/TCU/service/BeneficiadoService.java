@@ -1,0 +1,20 @@
+package com.TCU.service;
+
+
+
+
+import com.TCU.domain.Beneficiado;
+import java.time.LocalDate;
+import java.util.List;
+
+public interface BeneficiadoService {
+    
+    public List<Beneficiado> getBeneficiados(LocalDate date);
+      
+    public Beneficiado getBeneficiado(Beneficiado beneficiado);
+    
+    public void save(Beneficiado beneficiado);
+    
+    public void delete(Beneficiado beneficiado);
+    
+}

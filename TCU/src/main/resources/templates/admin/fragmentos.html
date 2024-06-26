@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+    </head>
+    <body>
+
+
+        <section th:fragment="listadoUsuarios">
+
+            <div class="text-white">
+                <center>
+                    <br/>
+                    <h2>[[#{admin.lista}]]</h2>
+                    <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
+                </center>
+            </div>
+            <div style="display:flex;">
+                <div class="col-md-2">
+                    <a th:href="@{/}" style="width: 100%;" class="mt-2 btn btn-primary ">
+                        <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                    </a>
+                    <a th:href="@{/admin/usuarios/nuevo}" style="width: 100%;" class="mt-2 btn btn-success ">
+                        <i class="fas fa-add"></i> Agregar
+                    </a>
+                    <div class="mt-3 card text-center bg-dark text-white mb-3">
+                        <div class="card-body">
+                            <h3>[[#{admin.usuarios}]]:  [[${totalUsuarios}]]</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div  class="card">
+
+                        <div th:if="${usuarios != null and !usuarios.empty}" style="background-color: #ccc;">
+
+                            <center>
+                                <div style="display: flex;justify-content: center; flex-wrap: wrap;">
+                                    <div th:each="usuario, contador : ${usuarios}" class="card m-2" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[[${usuario.username}]]</h5>
+                                            <p>[[${usuario.nombreUsuario}]] [[${usuario.primerApellido}]] [[${usuario.segundoApellido}]]</p>
+                                            <p>[[${usuario.correo}]]</p>
+                                            <p>[[${usuario.telefono}]]</p>                  
+                                            <a th:href="@{/admin/usuarios/modificar/}+${usuario.idUsuario} " style="width: 100%"class="btn btn-primary my-2">[[#{accion.editar}]]</a>
+                                            <a th:href="@{/admin/usuarios/eliminar/}+${usuario.idUsuario} " style="width: 100%"class="btn btn-warning">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+
+        <section th:fragment="EditarUsuario">
+
+            <div style="display:flex">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <center>
+                        <br/>
+                        <h2 class="text-white">[[#{admin.editarUsuario}]]</h2>
+                        <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
+                    </center>
+
+                    <form method="POST" th:action="@{/admin/usuarios/guardar}" th:object="${usuario}" class="was-validated" enctype="multipart/form-data">
+                        <input type="hidden" name="idUsuario" th:field="*{idUsuario}"/>
+                        <input type="hidden" name="username" th:field="*{username}"/>
+
+
+                        <div class="mb-3">
+                            <label for="nombreUsuario">Nombre</label>
+                            <input type="text" class="form-control" id="nombre_usuario" th:field="*{nombreUsuario}" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="primerApellido">Primer Apellido</label>
+                            <input type="text" class="form-control" th:field="*{primerApellido}" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="segundoApellido">Segundo Apellido</label>
+                            <input type="text" class="form-control" th:field="*{segundoApellido}" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo">Correo</label>
+                            <input type="email" class="form-control" id="correo" th:field="*{correo}" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" class="form-control" th:field="*{telefono}" required="true" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rol.idRol">Rol</label>
+                            <select class="form-select" id="rol" name="rol.idRol" th:field="*{rol.idRol}">
+                                <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nombreRol}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Introduce una nueva contraseña"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" style="width: 100%;">Actualizar</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </section>
+        <section th:fragment="AgregarUsuario">
+
+            <div style="display:flex">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <center>
+                        <br/>
+                        <h2 class="text-white">[[#{admin.editarUsuario}]]</h2>
+                        <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
+                    </center>
+
+                    <form method="POST" th:action="@{/admin/usuarios/agregar}" th:object="${usuario}" class="was-validated" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label for="Username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required="true"  />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="primerApellido">Primer Apellido</label>
+                            <input type="text" class="form-control" id="primerApellido" name="primerApellido"  required="true"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="segundoApellido">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" required="true"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo">Correo</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required="true"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" required="true"  />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rol.idRol">Rol</label>
+                            <select class="form-select" id="rol" name="rol.idRol" >
+                                <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nombreRol}" th:selected="${rol.idRol == 2}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password"  required="true"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" style="width: 100%;">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </body>
+</html>
