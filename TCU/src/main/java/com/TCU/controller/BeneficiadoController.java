@@ -9,6 +9,7 @@ import com.TCU.service.BeneficiadoService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.YearMonth;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class BeneficiadoController {
     public String getBeneficiadosPorFecha(
             @RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaSeleccionada, Model model) {
         List<Beneficiado> filtro = beneficiadoService.getBeneficiados(fechaSeleccionada);
+
+        YearMonth yearMonth = YearMonth.from(fechaSeleccionada);
+
+        model.addAttribute("fecha", yearMonth);
         model.addAttribute("beneficiados", filtro);
         model.addAttribute("totalBeneficiados", filtro.size());
         return "beneficiado/filtro";
@@ -60,9 +65,8 @@ public class BeneficiadoController {
             return "redirect:/beneficiado/listado";
         }
 
-     
         model.addAttribute("beneficiado", beneficiado);
-        model.addAttribute("fecha", beneficiado.getFecha().toString()); 
+        model.addAttribute("fecha", beneficiado.getFecha().toString());
 
         return "beneficiado/modificar";
 
@@ -77,8 +81,8 @@ public class BeneficiadoController {
     public String guardar(Beneficiado beneficiado) {
         beneficiado.setEstado(true);
         beneficiado.setFecha(LocalDate.now());
-        LocalDate fechaNacimiento= LocalDate.parse(beneficiado.getFechaNac());
-        beneficiado.setEdad( Period.between( fechaNacimiento, LocalDate.now()).getYears());
+        LocalDate fechaNacimiento = LocalDate.parse(beneficiado.getFechaNac());
+        beneficiado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
         beneficiadoService.save(beneficiado);
 
         return "redirect:/beneficiado/listado";
@@ -89,8 +93,8 @@ public class BeneficiadoController {
         if (beneficiado.getFecha().getMonthValue() != LocalDate.now().getMonthValue()) {
             return "redirect:/beneficiado/listado";
         } else {
-            LocalDate fechaNacimiento= LocalDate.parse(beneficiado.getFechaNac());
-        beneficiado.setEdad( Period.between( fechaNacimiento, LocalDate.now()).getYears());
+            LocalDate fechaNacimiento = LocalDate.parse(beneficiado.getFechaNac());
+            beneficiado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
             beneficiadoService.save(beneficiado);
             return "redirect:/beneficiado/listado";
         }
@@ -98,15 +102,14 @@ public class BeneficiadoController {
 
     @GetMapping("/eliminar/{idBeneficiado}")
     public String Eliminar(Beneficiado beneficiado) {
-        
-         beneficiado = beneficiadoService.getBeneficiado(beneficiado);
+
+        beneficiado = beneficiadoService.getBeneficiado(beneficiado);
 
         // Verificar si la fecha del beneficiado no es del mismo mes y año actual
         LocalDate now = LocalDate.now();
         if (beneficiado.getFecha().getMonthValue() != now.getMonthValue() || beneficiado.getFecha().getYear() != now.getYear()) {
             return "redirect:/beneficiado/listado";
         }
-
 
         beneficiadoService.delete(beneficiado);
 

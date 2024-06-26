@@ -156,11 +156,7 @@
                                         <label for="numIdentificacion" class="form-label">Número de Identificación</label>
                                         <input type="text" class="form-control" id="numIdentificacion" name="numIdentificacion" th:field="*{numIdentificacion}" required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="fecha" class="form-label">Fecha</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha" th:value="${fecha}" required
-                                               th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                                    </div>
+                                   
                                     <div class="mb-3">
                                         <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
                                         <input type="date" class="form-control" id="fechaNac" name="fechaNac" th:field="*{fechaNac}" required
@@ -371,7 +367,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>[[#{beneficiado.listado}]]</h4>
+                                <h4>Fecha buscada: [[${fecha}]]</h4>
                             </div>
                             <div th:if="${beneficiados != null and !beneficiados.empty}">
                                 <div class="table-responsive">

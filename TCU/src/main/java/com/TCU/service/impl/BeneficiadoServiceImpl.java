@@ -45,4 +45,15 @@ public class BeneficiadoServiceImpl implements BeneficiadoService {
         beneficiadoDao.delete(beneficiado);
     }
 
+    @Override
+    public List<Beneficiado> getTodos() {
+        return beneficiadoDao.findAll();
+    }
+
+    @Override
+    public List<Beneficiado> findAllBeneficiadosWithoutPension() {
+      
+        return beneficiadoDao.findAllBeneficiadosWithoutPensionAndInMonth(LocalDate.now());
+    }
+
 }

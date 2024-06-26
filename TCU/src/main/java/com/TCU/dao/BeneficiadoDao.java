@@ -19,5 +19,11 @@ public interface BeneficiadoDao extends JpaRepository<Beneficiado, Long> {
 
    @Query("SELECT b FROM Beneficiado b WHERE MONTH(b.fecha) = MONTH(:selectedDate) AND YEAR(b.fecha) = YEAR(:selectedDate)")
     List<Beneficiado> findBySelectedMonth(@Param("selectedDate") LocalDate selectedDate);
+    
+    @Query("SELECT b FROM Beneficiado b " +
+           "WHERE NOT EXISTS (SELECT p FROM Pension p WHERE p.beneficiado = b) " +
+           "AND MONTH(b.fecha) = MONTH(:selectedDate) AND YEAR(b.fecha) = YEAR(:selectedDate)")
+    List<Beneficiado> findAllBeneficiadosWithoutPensionAndInMonth(
+            @Param("selectedDate") LocalDate selectedDate);
 
 }

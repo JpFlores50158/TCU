@@ -72,13 +72,11 @@ CREATE TABLE ABIPAM.pensiones (
     mont_pension DECIMAL(10, 2) NOT NULL,
     ley9188_est_actual_activo BOOLEAN NOT NULL,
     ley7972_est_actual_activo BOOLEAN NOT NULL,
+    tipo_ingre_fallec VARCHAR(50) NOT NULL,
     fecha_ingr_fallec DATE NOT NULL,
-    ley7972_monto_ayuda DECIMAL(10, 2) NOT NULL,
-    ley9188_monto_ayuda DECIMAL(10, 2) NOT NULL,
     mes_lista DATE NOT NULL,
     fiscalizador VARCHAR(50) NOT NULL,
     sinerube VARCHAR(50) NOT NULL,
-    fecha DATE NOT NULL,
     estado boolean not null,
     PRIMARY KEY (id_pension),
     FOREIGN KEY (id_beneficiado) REFERENCES ABIPAM.beneficiado(id_beneficiado)
@@ -99,11 +97,13 @@ CREATE TABLE ABIPAM.ayuda (
     asistente_domiciliar BOOLEAN NOT NULL,
     fecha DATE NOT NULL,
     estado boolean not null,
+	ley7972_monto_ayuda DECIMAL(10, 2) NOT NULL,
+    ley9188_monto_ayuda DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (id_ayuda),
     FOREIGN KEY (id_beneficiado) REFERENCES ABIPAM.beneficiado(id_beneficiado)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
+drop table abipam.ayuda
 
 
 /* Se crea la tabla de lista de espera */
@@ -178,4 +178,6 @@ VALUES
 ('Lucía', 'Ruiz', 'López', 'DNI', 12398712, '1981-03-22', 43, 'F', 'Modalidad10', '2024-06-25', '2023-09-25', false);
 
 
-select * from abipam.beneficiado
+select * from abipam.beneficiado;
+
+select * from abipam.pensiones;

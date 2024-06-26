@@ -17,4 +17,9 @@ public interface BeneficiadoService {
     
     public void delete(Beneficiado beneficiado);
     
+     public List<Beneficiado> getTodos();
+     
+     
+     public List<Beneficiado> findAllBeneficiadosWithoutPension();
+    
 }
