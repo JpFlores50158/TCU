@@ -87,18 +87,18 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE ABIPAM.ayuda (
     id_ayuda INT NOT NULL AUTO_INCREMENT,
     id_beneficiado INT NOT NULL,
-    alimentacion BOOLEAN NOT NULL,
-    articulos_uso_personal_higiene BOOLEAN NOT NULL,
-    atencion_social_salud_integral BOOLEAN NOT NULL,
-    productos_apoyo_ayudas_tecnicas BOOLEAN NOT NULL,
-    equipamiento_casa BOOLEAN NOT NULL,
-    alquiler_vivienda_servicios_basicos BOOLEAN NOT NULL,
-    familias_solidarias BOOLEAN NOT NULL,
-    asistente_domiciliar BOOLEAN NOT NULL,
+    alimentacion DECIMAL(10, 2) NOT NULL,
+    articulos_uso_personal_higiene DECIMAL(10, 2) NOT NULL,
+    atencion_social_salud_integral DECIMAL(10, 2) NOT NULL,
+    productos_apoyo_ayudas_tecnicas DECIMAL(10, 2) NOT NULL,
+    equipamiento_casa DECIMAL(10, 2) NOT NULL,
+    alquiler_vivienda_servicios_basicos DECIMAL(10, 2) NOT NULL,
+    familias_solidarias DECIMAL(10, 2) NOT NULL,
+    asistente_domiciliar DECIMAL(10, 2) NOT NULL,
+    ley7972_monto_ayuda DECIMAL(10, 2) NOT NULL,
+    ley9188_monto_ayuda DECIMAL(10, 2) NOT NULL,
     fecha DATE NOT NULL,
     estado boolean not null,
-	ley7972_monto_ayuda DECIMAL(10, 2) NOT NULL,
-    ley9188_monto_ayuda DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (id_ayuda),
     FOREIGN KEY (id_beneficiado) REFERENCES ABIPAM.beneficiado(id_beneficiado)
 ) ENGINE = InnoDB
@@ -181,3 +181,5 @@ VALUES
 select * from abipam.beneficiado;
 
 select * from abipam.pensiones;
+
+select * from abipam.ayuda;

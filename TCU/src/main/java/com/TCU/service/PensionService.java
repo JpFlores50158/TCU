@@ -8,10 +8,10 @@ public interface PensionService {
     
     public List<Pension> getPensiones(LocalDate date);
       
-    public Pension getPension(Pension Pension);
+    public Pension getPension(Pension pension);
     
-    public void save(Pension Pension);
+    public void save(Pension pension);
     
-    public void delete(Pension Pension);
+    public void delete(Pension pension);
     
 }

@@ -90,14 +90,12 @@ public class BeneficiadoController {
 
     @PostMapping("/actualizar")
     public String actualizar(Beneficiado beneficiado) {
-        if (beneficiado.getFecha().getMonthValue() != LocalDate.now().getMonthValue()) {
-            return "redirect:/beneficiado/listado";
-        } else {
+       
             LocalDate fechaNacimiento = LocalDate.parse(beneficiado.getFechaNac());
             beneficiado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
             beneficiadoService.save(beneficiado);
             return "redirect:/beneficiado/listado";
-        }
+        
     }
 
     @GetMapping("/eliminar/{idBeneficiado}")

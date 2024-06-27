@@ -20,6 +20,8 @@ public interface BeneficiadoService {
      public List<Beneficiado> getTodos();
      
      
-     public List<Beneficiado> findAllBeneficiadosWithoutPension();
+     public List<Beneficiado> findAllBeneficiadosWithoutPensionInMonth();
+     
+     public List<Beneficiado> findAllBeneficiadosWithoutAyudaInMonth();
     
 }

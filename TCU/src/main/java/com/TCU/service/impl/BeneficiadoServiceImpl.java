@@ -51,9 +51,14 @@ public class BeneficiadoServiceImpl implements BeneficiadoService {
     }
 
     @Override
-    public List<Beneficiado> findAllBeneficiadosWithoutPension() {
+    public List<Beneficiado> findAllBeneficiadosWithoutPensionInMonth() {
       
         return beneficiadoDao.findAllBeneficiadosWithoutPensionAndInMonth(LocalDate.now());
+    }
+
+    @Override
+    public List<Beneficiado> findAllBeneficiadosWithoutAyudaInMonth() {
+         return beneficiadoDao.findAllBeneficiadosWithoutAyudaAndInMonth(LocalDate.now());
     }
 
 }
