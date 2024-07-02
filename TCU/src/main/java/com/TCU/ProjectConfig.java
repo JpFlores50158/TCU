@@ -66,11 +66,11 @@ public class ProjectConfig  implements WebMvcConfigurer{
                         .requestMatchers("/", "/index", "/errores/**",
                                 "/registro/**", "/logout", "/images/**",
                                 "/templates/**", "/js/**", "/webjars/**",
-                                "/obra/listado", "/nosotros/**", "/error?continue", "/error")
+                                "/obra/listado", "/nosotros/**", "/error?continue", "/error","/actividad/nuevo","/actividad/guardar","actividad/exito")
                         .permitAll()
                         .requestMatchers( "/admin/**")
                         .hasRole("ADMIN")
-                        .requestMatchers("/perfil/**", "/beneficiado/**","/pension/**","/ayuda/**")
+                        .requestMatchers("/perfil/**", "/beneficiado/**","/pension/**","/ayuda/**","/actividad/**")
                         .hasAnyRole("ADMIN", "USER")
                 )
                 .formLogin((form) -> form
