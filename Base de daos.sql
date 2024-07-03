@@ -83,29 +83,29 @@ CREATE TABLE ABIPAM.pensiones (
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-/* Se crea la tabla de ayuda */
 CREATE TABLE ABIPAM.ayuda (
     id_ayuda INT NOT NULL AUTO_INCREMENT,
     id_beneficiado INT NOT NULL,
-    alimentacion DECIMAL(10, 2) NOT NULL,
-    articulos_uso_personal_higiene DECIMAL(10, 2) NOT NULL,
-    atencion_social_salud_integral DECIMAL(10, 2) NOT NULL,
-    productos_apoyo_ayudas_tecnicas DECIMAL(10, 2) NOT NULL,
-    equipamiento_casa DECIMAL(10, 2) NOT NULL,
-    alquiler_vivienda_servicios_basicos DECIMAL(10, 2) NOT NULL,
-    familias_solidarias DECIMAL(10, 2) NOT NULL,
-    asistente_domiciliar DECIMAL(10, 2) NOT NULL,
-    ley7972_monto_ayuda DECIMAL(10, 2) NOT NULL,
-    ley9188_monto_ayuda DECIMAL(10, 2) NOT NULL,
+    alimentacion DECIMAL(15, 2) NOT NULL,
+    articulos_uso_personal_higiene DECIMAL(15, 2) NOT NULL,
+    atencion_social_salud_integral DECIMAL(15, 2) NOT NULL,
+    productos_apoyo_ayudas_tecnicas DECIMAL(15, 2) NOT NULL,
+    equipamiento_casa DECIMAL(15, 2) NOT NULL,
+    alquiler_vivienda_servicios_basicos DECIMAL(15, 2) NOT NULL,
+    familias_solidarias DECIMAL(15, 2) NOT NULL,
+    asistente_domiciliar DECIMAL(15, 2) NOT NULL,
+    ley7972_monto_ayuda DECIMAL(15, 2) NOT NULL,
+    ley9188_monto_ayuda DECIMAL(15, 2) NOT NULL,
     fecha DATE NOT NULL,
-    estado boolean not null,
+    estado BOOLEAN NOT NULL,
     PRIMARY KEY (id_ayuda),
     FOREIGN KEY (id_beneficiado) REFERENCES ABIPAM.beneficiado(id_beneficiado)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-drop table abipam.ayuda
 
+drop table abipam.ayuda;
 
+select * from abipam.ayuda;
 /* Se crea la tabla de lista de espera */
 CREATE TABLE ABIPAM.lista_espera (
     id_lista_espera INT NOT NULL AUTO_INCREMENT,
@@ -117,14 +117,14 @@ CREATE TABLE ABIPAM.lista_espera (
     provincia VARCHAR(50) NOT NULL,
     canton VARCHAR(50) NOT NULL,
     distrito VARCHAR(50) NOT NULL,
-    senas TEXT NOT NULL,
+    direccion TEXT NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     fecha_ingreso DATE NOT NULL,
     descripcion_problema TEXT NOT NULL,
-    prioridad VARCHAR(50) NOT NULL,
+    prioridad INT NOT NULL,
     fuente VARCHAR(50) NOT NULL,
     edad INT NOT NULL,
-    notificado_posicion_lista_espera BOOLEAN NOT NULL,
+    notificado_posicion_lista_espera VARCHAR(50) NOT NULL,
     observacion TEXT NOT NULL,
     sinirubre_estado_justificacion TEXT NOT NULL,
     PRIMARY KEY (id_lista_espera)
@@ -132,6 +132,7 @@ CREATE TABLE ABIPAM.lista_espera (
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+drop table abipam.lista_espera;
 /* Se crea la tabla de actividades */
 CREATE TABLE ABIPAM.actividades (
     id_actividad INT NOT NULL AUTO_INCREMENT,
@@ -183,3 +184,20 @@ select * from abipam.beneficiado;
 select * from abipam.pensiones;
 
 select * from abipam.ayuda;
+
+select * from abipam.usuario;
+
+
+
+
+INSERT INTO ABIPAM.lista_espera 
+    (primer_apellido, segundo_apellido, nombre, no_cedula, fecha_nacimiento, provincia, canton, distrito, direccion, telefono, fecha_ingreso, descripcion_problema, prioridad, fuente, edad, notificado_posicion_lista_espera, observacion, sinirubre_estado_justificacion)
+VALUES 
+    ('González', 'Pérez', 'María', '123456789', '1985-05-15', 'San José', 'San Pedro', 'Montes de Oca', 'Calle Principal 123', '2222-1111', '2024-07-03', 'Problema urgente de salud', 1, 'Hospital Nacional', 40, 'Sí', 'Necesita atención inmediata.', 'Justificación médica en proceso...'),
+    ('López', 'Sánchez', 'Juan', '987654321', '1992-10-20', 'Heredia', 'Barva', 'San Pablo', 'Avenida Central 456', '3333-2222', '2024-07-03', 'Consulta médica regular', 2, 'Clínica Local', 32, 'No', 'En seguimiento por especialista.', 'Justificación pendiente...'),
+    ('Martínez', 'Rodríguez', 'Pedro', '567890123', '1980-08-12', 'Alajuela', 'Alajuela', 'Alajuela Centro', 'Calle Norte 789', '4444-5555', '2024-07-03', 'Control de rutina', 3, 'Consultorio Médico', 44, 'Sí', 'Sin observaciones adicionales.', 'N/A');
+SELECT *
+FROM ABIPAM.lista_espera
+ORDER BY prioridad DESC;
+
+select * from abipam.beneficiado

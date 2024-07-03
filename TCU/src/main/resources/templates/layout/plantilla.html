@@ -126,7 +126,9 @@
                                     <li class="nav-item px-2" sec:authorize="isAuthenticated()">
                                         <a class="nav-link" href="/actividad/listado"><span>Actividades</span></a>
                                     </li>
-
+                                     <li class="nav-item px-2" sec:authorize="isAuthenticated()">
+                                        <a class="nav-link" href="/listaEspera/listado"><span>Lista espera</span></a>
+                                    </li>
 
                                     <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
                                         <a class="nav-link" href="/admin/usuarios/listado"><span>Usuarios</span></a>
@@ -171,7 +173,7 @@
 
         <section th:fragment="contenido" style="overflow: auto;" >
 
-            <div class="container">
+            <div class="container" sec:authorize="!isAuthenticated()">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
@@ -242,6 +244,18 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" sec:authorize="isAuthenticated()">
+                <div class="row">
+                    <div class="col-md-4 my-3">
+                        <div class="card text-center bg-success text-white mb-1">
+                            <a th:href="@{/excel/download}" class="btn btn-success card-body">
+                                <i class="fas fa-add"></i> Descargar Excel del mes
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -14,5 +14,8 @@ public interface AyudaDao extends JpaRepository<Ayuda, Long>{
  @Query("SELECT a FROM Ayuda a WHERE MONTH(a.fecha) = MONTH(:selectedDate) AND YEAR(a.fecha) = YEAR(:selectedDate)")
     List<Ayuda> findBySelectedMonth(@Param("selectedDate") LocalDate selectedDate);
     
+     @Query("SELECT a FROM Ayuda a WHERE a.beneficiado.idBeneficiado = :idBeneficiado")
+   Ayuda findByBeneficiadoId(@Param("idBeneficiado") Long idBeneficiado);
+    
     
 }

@@ -70,10 +70,10 @@
                                             <tr th:each="ayuda, contador : ${ayudas}">
                                                 <td>
                                                     <a th:href="@{/ayuda/eliminar/}+${ayuda.idAyuda}"
-                                                       class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminarlo?');">
                                                         <i class="fas fa-trash"></i> Eliminar</a>
                                                     <a th:href="@{/ayuda/modificar/}+${ayuda.idAyuda}"
-                                                       class="btn btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-success" >
                                                         <i class="fas fa-pencil"></i> Modificar</a>
                                                 </td>
                                                 <td>[[${contador.count}]]</td>
@@ -144,47 +144,47 @@
 
                                     <div class="mb-3">
                                         <label for="alimentacion" class="form-label">Alimentación</label>
-                                        <input type="number" class="form-control" id="alimentacion" name="alimentacion" th:field="*{alimentacion}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="alimentacion" name="alimentacion" th:field="*{alimentacion}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="articulosUsoPersonalHigiene" class="form-label">Artículos de Uso Personal e Higiene</label>
-                                        <input type="number" class="form-control" id="articulosUsoPersonalHigiene" name="articulosUsoPersonalHigiene" th:field="*{articulosUsoPersonalHigiene}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="articulosUsoPersonalHigiene" name="articulosUsoPersonalHigiene" th:field="*{articulosUsoPersonalHigiene}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="atencionSocialSaludIntegral" class="form-label">Atención Social y Salud Integral</label>
-                                        <input type="number" class="form-control" id="atencionSocialSaludIntegral" name="atencionSocialSaludIntegral" th:field="*{atencionSocialSaludIntegral}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="atencionSocialSaludIntegral" name="atencionSocialSaludIntegral" th:field="*{atencionSocialSaludIntegral}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="productosApoyoAyudasTecnicas" class="form-label">Productos de Apoyo y Ayudas Técnicas</label>
-                                        <input type="number" class="form-control" id="productosApoyoAyudasTecnicas" name="productosApoyoAyudasTecnicas" th:field="*{productosApoyoAyudasTecnicas}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="productosApoyoAyudasTecnicas" name="productosApoyoAyudasTecnicas" th:field="*{productosApoyoAyudasTecnicas}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="equipamientoCasa" class="form-label">Equipamiento de la Casa</label>
-                                        <input type="number" class="form-control" id="equipamientoCasa" name="equipamientoCasa" th:field="*{equipamientoCasa}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="equipamientoCasa" name="equipamientoCasa" th:field="*{equipamientoCasa}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="alquilerViviendaServiciosBasicos" class="form-label">Alquiler de Vivienda y Servicios Básicos</label>
-                                        <input type="number" class="form-control" id="alquilerViviendaServiciosBasicos" name="alquilerViviendaServiciosBasicos" th:field="*{alquilerViviendaServiciosBasicos}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="alquilerViviendaServiciosBasicos" name="alquilerViviendaServiciosBasicos" th:field="*{alquilerViviendaServiciosBasicos}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="familiasSolidarias" class="form-label">Familias Solidarias</label>
-                                        <input type="number" class="form-control" id="familiasSolidarias" name="familiasSolidarias" th:field="*{familiasSolidarias}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="familiasSolidarias" name="familiasSolidarias" th:field="*{familiasSolidarias}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="asistenteDomiciliar" class="form-label">Asistente Domiciliar</label>
-                                        <input type="number" class="form-control" id="asistenteDomiciliar" name="asistenteDomiciliar" th:field="*{asistenteDomiciliar}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="asistenteDomiciliar" name="asistenteDomiciliar" th:field="*{asistenteDomiciliar}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="ley7972MontoAyuda" class="form-label">Monto de Ayuda Ley 7972</label>
-                                        <input type="number" class="form-control" id="ley7972MontoAyuda" name="ley7972MontoAyuda" th:field="*{ley7972MontoAyuda}" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="ley7972MontoAyuda" name="ley7972MontoAyuda" th:field="*{ley7972MontoAyuda}" required value="0" step="0.01">
                                     </div>
 
                                     <div class="mb-3">
@@ -226,7 +226,7 @@
 
                                     <div class="form-group">
                                         <label for="alimentacion">Alimentación</label>
-                                        <input type="number" class="form-control" id="alimentacion" name="alimentacion" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="alimentacion" name="alimentacion"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
@@ -241,32 +241,37 @@
 
                                     <div class="form-group">
                                         <label for="productosApoyoAyudasTecnicas">Productos de Apoyo y Ayudas Técnicas</label>
-                                        <input type="number" class="form-control" id="productosApoyoAyudasTecnicas" name="productosApoyoAyudasTecnicas" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="productosApoyoAyudasTecnicas" name="productosApoyoAyudasTecnicas"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="equipamientoCasa">Equipamiento de la Casa</label>
-                                        <input type="number" class="form-control" id="equipamientoCasa" name="equipamientoCasa" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="equipamientoCasa" name="equipamientoCasa"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="alquilerViviendaServiciosBasicos">Alquiler de Vivienda y Servicios Básicos</label>
-                                        <input type="number" class="form-control" id="alquilerViviendaServiciosBasicos" name="alquilerViviendaServiciosBasicos" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="alquilerViviendaServiciosBasicos" name="alquilerViviendaServiciosBasicos"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="familiasSolidarias">Familias Solidarias</label>
-                                        <input type="number" class="form-control" id="familiasSolidarias" name="familiasSolidarias" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="familiasSolidarias" name="familiasSolidarias"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="asistenteDomiciliar">Asistente Domiciliar</label>
-                                        <input type="number" class="form-control" id="asistenteDomiciliar" name="asistenteDomiciliar" step="0.01" required value="0">
+                                        <input type="number" class="form-control" id="asistenteDomiciliar" name="asistenteDomiciliar"  step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="ley7972MontoAyuda">Monto de Ayuda Ley 7972</label>
                                         <input type="number" class="form-control" id="ley7972MontoAyuda" name="ley7972MontoAyuda" step="0.01" required value="0">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ley9188MontoAyuda">Monto de Ayuda Ley 9188</label>
+                                        <input type="number" class="form-control" id="ley9188MontoAyuda" name="ley9188MontoAyuda" step="0.01" required value="0">
                                     </div>
 
                                     <div class="form-group" style="display: flex; justify-content: center;">
@@ -361,7 +366,7 @@
                                                 <th>LEY 7972</th>
                                                 <th>LEY 9188</th>
                                                 <th>Fecha</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -380,7 +385,7 @@
                                                 <td>[[${ayuda.ley7972MontoAyuda}]]</td>
                                                 <td>[[${ayuda.ley9188MontoAyuda}]]</td>
                                                 <td>[[${ayuda.fecha}]]</td>
-                                               
+
                                             </tr>
                                         </tbody>
                                     </table>

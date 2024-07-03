@@ -47,10 +47,10 @@
                                             <tr th:each="actividad, contador : ${actividades}">
                                                 <td>
                                                     <a th:href="@{/actividad/eliminar/}+${actividad.idActividad}"
-                                                       class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminarlo?');">
                                                         <i class="fas fa-trash"></i> Eliminar</a>
                                                     <a th:href="@{/actividad/modificar/}+${actividad.idActividad}"
-                                                       class="btn btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-success" >
                                                         <i class="fas fa-pencil"></i> Modificar</a>
                                                 </td>
                                                 <td>[[${contador.count}]]</td>
@@ -123,6 +123,7 @@
                                             <option value="socialización" th:selected="${actividad.tipoActividad == 'socialización'}">Socialización</option>
                                             <option value="ejercicio físico" th:selected="${actividad.tipoActividad == 'ejercicio físico'}">Ejercicio Físico</option>
                                             <option value="capacitación" th:selected="${actividad.tipoActividad == 'capacitación'}">Capacitación</option>
+                                              <option value="otro" th:selected="${actividad.tipoActividad == 'otro'}">Otro</option>
                                         </select>
                                     </div>
 
@@ -202,6 +203,7 @@
                                             <option value="socialización">Socialización</option>
                                             <option value="ejercicio físico">Ejercicio Físico</option>
                                             <option value="capacitación">Capacitación</option>
+                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div>
 

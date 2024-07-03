@@ -42,7 +42,7 @@ public class Beneficiado implements Serializable {
     private long numIdentificacion;
     private String fechaNac;
     private int edad;
-    private char sexo;
+    private String sexo;
     private String modalidad;
     private LocalDate fecha;
     private String ultimaValoracion;

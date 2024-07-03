@@ -71,10 +71,10 @@
                                             <tr th:each="beneficiado, contador : ${beneficiados}">
                                                 <td>
                                                     <a th:href="@{/beneficiado/eliminar/}+${beneficiado.idBeneficiado}"
-                                                       class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminarlo?\n(se eliminaran todos los registros con base a este beneficiado)');">
                                                         <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                                     <a th:href="@{/beneficiado/modificar/}+${beneficiado.idBeneficiado}"
-                                                       class="btn btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                       class="btn btn-success">
                                                         <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a>
                                                 </td>
                                                 <td>[[${contador.count}]]</td>
@@ -124,15 +124,29 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
+
+                        
                         <form method="post" th:action="@{/beneficiado/actualizar}" th:object="${beneficiado}" class="was-validated" enctype="multipart/form-data">
                             <input type="hidden" name="idBeneficiado" id="idBeneficiado" th:field="*{idBeneficiado}" /> 
-                             <input type="hidden" name="fecha" id="fecha" th:field="*{fecha}" /> 
+                            <input type="hidden" name="fecha" id="fecha" th:field="*{fecha}" /> 
 
                             <div class="card">
                                 <div class="card-header bg-info text-white">
                                     <h5 class="card-title">Editar Beneficiado</h5>
                                 </div>
                                 <div class="card-body">
+
+
+                                    <div class="mb-3">
+                                        <label for="numIdentificacion" class="form-label">Número de Identificación</label>
+                                        <input type="text" class="form-control" id="numIdentificacion" name="numIdentificacion" th:field="*{numIdentificacion}" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" id="fechaNac" name="fechaNac" th:field="*{fechaNac}" required
+                                               th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="nombre1" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" id="nombre1" name="nombre1" th:field="*{nombre1}" required>
@@ -152,16 +166,6 @@
                                             <option value="Residencia" th:selected="${beneficiado.tipoIdentificacion == 'Residencia'}">Residencia</option>
 
                                         </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="numIdentificacion" class="form-label">Número de Identificación</label>
-                                        <input type="text" class="form-control" id="numIdentificacion" name="numIdentificacion" th:field="*{numIdentificacion}" required>
-                                    </div>
-                                   
-                                    <div class="mb-3">
-                                        <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control" id="fechaNac" name="fechaNac" th:field="*{fechaNac}" required
-                                               th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                                     </div>
 
                                     <div class="mb-3">
@@ -199,6 +203,33 @@
                     </div>
                 </div>
             </div>
+            <script>
+                $("#numIdentificacion").change(function () {
+                    ConsultarNombre();
+                });
+                function ConsultarNombre() {
+                    let identificacion = $("#numIdentificacion").val();
+
+                    $.ajax({
+                        url: "https://apis.gometa.org/cedulas/" + identificacion,
+                        method: "GET",
+                        dataType: "json",
+                        success: function (response) {
+                            console.log("Respuesta del API:", response); // Verificar la respuesta en la consola
+                            var resultado = response.results[0];
+                            $("#nombre1").val(resultado.firstname);
+                            $("#apellido1").val(resultado.lastname1);
+                            $("#apellido2").val(resultado.lastname2);
+                            // Verificar si hay resultados
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error al obtener los datos del API:", error);
+                            // Manejar el error según sea necesario
+                        }
+                    });
+                }
+            </script>
         </section>
 
         <section th:fragment="agregarBeneficiado">
@@ -221,7 +252,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="numIdentificacion">Número de Identificación</label>
+                                        <label for="numIdentificacion">Número de Identificación </label>
+                                        <p>(Si ya existe no lo va a dejar agregar)</p>
                                         <input type="text" class="form-control" id="numIdentificacion" name="numIdentificacion"
                                                required >
                                     </div>

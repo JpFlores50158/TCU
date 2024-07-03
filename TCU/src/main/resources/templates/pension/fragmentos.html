@@ -70,7 +70,7 @@
                                             <tr th:each="pension, contador : ${pensiones}">
                                                 <td>
                                                     <a th:href="@{/pension/eliminar/}+${pension.idPension}"
-                                                       class="btn btn-danger">
+                                                       class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminarlo?');">
                                                         <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                     </a>
                                                     <a th:href="@{/pension/modificar/}+${pension.idPension}"
