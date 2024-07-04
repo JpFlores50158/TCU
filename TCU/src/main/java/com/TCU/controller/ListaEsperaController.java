@@ -110,7 +110,7 @@ public class ListaEsperaController {
         beneficiado.setNumIdentificacion(Long.parseLong(resultado.getNoCedula()));
         beneficiado.setFechaNac(resultado.getFechaNacimiento());
         beneficiado.setEdad(resultado.getEdad());
-        beneficiado.setSexo("M".charAt(0));
+        beneficiado.setSexo("M");
          beneficiado.setModalidad("Red de Cuido");
          beneficiado.setFecha(LocalDate.now());
          beneficiado.setUltimaValoracion(LocalDate.now().toString());

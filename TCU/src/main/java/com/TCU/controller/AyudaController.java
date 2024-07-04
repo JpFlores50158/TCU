@@ -146,5 +146,13 @@ public class AyudaController {
 
         return "redirect:/ayuda/listado";
     }
+    
+     @GetMapping("/actualizarTodo")
+    public String actualizarTodo() {
+
+      ayudaService.updateAllAyudasFecha(LocalDate.now());
+
+        return "redirect:/ayuda/listado";
+    }
 
 }

@@ -4,6 +4,11 @@
  */
 package com.TCU;
 
+import com.TCU.service.AyudaService;
+import com.TCU.service.BeneficiadoService;
+import com.TCU.service.PensionService;
+import jakarta.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -27,11 +32,21 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
  * @author jp09f
  */
 @Configuration
-public class ProjectConfig  implements WebMvcConfigurer{
+public class ProjectConfig implements WebMvcConfigurer {
+
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private BeneficiadoService beneficiadoService;
+     @Autowired
+    private AyudaService ayudaService;
+     
+      @Autowired
+    private PensionService pensionService;
+
     @Bean
-    public LocaleResolver localeServer(){
+    public LocaleResolver localeServer() {
         var slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.getDefault());
         slr.setLocaleAttributeName("session.current.locale");
@@ -40,12 +55,11 @@ public class ProjectConfig  implements WebMvcConfigurer{
         return slr;
     }
 
-
-   
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -54,7 +68,6 @@ public class ProjectConfig  implements WebMvcConfigurer{
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
 
-  
     public ProjectConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -63,20 +76,31 @@ public class ProjectConfig  implements WebMvcConfigurer{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/", "/index", "/errores/**",
-                                "/registro/**", "/logout", "/images/**",
-                                "/templates/**", "/js/**", "/webjars/**",
-                                "/obra/listado", "/nosotros/**", "/error?continue", "/error","/actividad/nuevo","/actividad/guardar","actividad/exito")
-                        .permitAll()
-                        .requestMatchers( "/admin/**")
-                        .hasRole("ADMIN")
-                        .requestMatchers("/perfil/**", "/beneficiado/**","/pension/**","/ayuda/**","/actividad/**","/listaEspera/**","/excel/**")
-                        .hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/", "/index", "/errores/**",
+                        "/registro/**", "/logout", "/images/**",
+                        "/templates/**", "/js/**", "/webjars/**",
+                        "/obra/listado", "/nosotros/**", "/error?continue", "/error", "/actividad/nuevo", "/actividad/guardar", "actividad/exito")
+                .permitAll()
+                .requestMatchers("/admin/**")
+                .hasRole("ADMIN")
+                .requestMatchers("/perfil/**", "/beneficiado/**", "/pension/**", "/ayuda/**", "/actividad/**", "/listaEspera/**", "/excel/**")
+                .hasAnyRole("ADMIN", "USER")
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login").permitAll())
+                .loginPage("/login").permitAll())
                 .logout((logout) -> logout.permitAll());
 
         return http.build();
+    }
+
+     @PostConstruct
+    public void init() {
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.getDayOfMonth() == 1) {
+           
+            beneficiadoService.updateAllBeneficiadosFecha(currentDate);
+            ayudaService.updateAllAyudasFecha(currentDate);
+             pensionService.updateAllPensionesFecha(currentDate);
+        }
     }
 }

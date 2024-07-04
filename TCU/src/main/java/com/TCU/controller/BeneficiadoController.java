@@ -148,6 +148,14 @@ public class BeneficiadoController {
 
         return "redirect:/beneficiado/listado";
     }
+    
+     @GetMapping("/actualizarTodo")
+    public String actualizarTodo() {
+
+      beneficiadoService.updateAllBeneficiadosFecha(LocalDate.now());
+
+        return "redirect:/beneficiado/listado";
+    }
 
 }
   

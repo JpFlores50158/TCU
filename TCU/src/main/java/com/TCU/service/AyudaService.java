@@ -15,4 +15,7 @@ public interface AyudaService {
     
     public void delete(Ayuda ayuda);
     
+    
+    
+    public void updateAllAyudasFecha(LocalDate newDate);
 }

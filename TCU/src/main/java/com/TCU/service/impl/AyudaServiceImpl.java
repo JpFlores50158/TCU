@@ -41,8 +41,15 @@ public class AyudaServiceImpl implements AyudaService {
     }
 
     @Override
+    @Transactional
     public void delete(Ayuda ayuda) {
         ayudaDao.delete(ayuda);
+    }
+
+    @Override
+    @Transactional
+    public void updateAllAyudasFecha(LocalDate newDate) {
+       ayudaDao.updateAllAyudasFecha(newDate);
     }
 
 }

@@ -8,7 +8,6 @@ import com.TCU.dao.PensionDao;
 import com.TCU.domain.Pension;
 import com.TCU.service.PensionService;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,15 @@ public class PensionServiceImpl implements PensionService {
     }
 
     @Override
+    @Transactional
     public void delete(Pension pension) {
         pensionDao.delete(pension);
+    }
+
+    @Override
+    @Transactional
+    public void updateAllPensionesFecha(LocalDate newDate) {
+        pensionDao.updateAllPensionesFecha(newDate);
     }
 
 }

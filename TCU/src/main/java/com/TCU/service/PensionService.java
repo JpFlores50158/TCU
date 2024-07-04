@@ -14,4 +14,6 @@ public interface PensionService {
     
     public void delete(Pension pension);
     
+     public void updateAllPensionesFecha(LocalDate newDate);
+    
 }

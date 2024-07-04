@@ -163,41 +163,49 @@ insert into ABIPAM.rol (id_rol, nombre_rol, id_usuario) values
  (5,'ROLE_USER',3);
  
  
- 
- 
- INSERT INTO ABIPAM.beneficiado (nombre_1, apellido_1, apellido_2, tipo_identificacion, num_identificacion, fecha_nac, edad, sexo, modalidad, fecha, ultima_valoracion, estado)
-VALUES 
-('Juan', 'Pérez', 'Gómez', 'DNI', 12345678, '1980-05-15', 44, 'M', 'Modalidad1', '2024-06-25', '2024-06-01', true),
-('María', 'Rodríguez', 'López', 'Pasaporte', 98765432, '1990-11-20', 33, 'F', 'Modalidad2', '2024-06-25', '2024-05-15', true),
-('Carlos', 'Fernández', 'Martínez', 'Cédula', 12312312, '1985-02-10', 39, 'M', 'Modalidad3', '2024-06-25', '2024-04-20', true),
-('Laura', 'García', 'Sánchez', 'DNI', 45645645, '1978-08-05', 45, 'F', 'Modalidad4', '2024-06-25', '2024-03-10', false),
-('Pedro', 'Hernández', 'Ruiz', 'Pasaporte', 78978978, '1995-01-30', 29, 'M', 'Modalidad5', '2024-06-25', '2024-02-25', true),
-('Ana', 'González', 'Pérez', 'Cédula', 32132132, '1983-07-25', 40, 'F', 'Modalidad6', '2024-06-25', '2024-01-15', false),
-('Luis', 'López', 'Ramírez', 'DNI', 65465465, '1972-12-14', 51, 'M', 'Modalidad7', '2024-06-25', '2023-12-10', true),
-('Marta', 'Martínez', 'Hernández', 'Pasaporte', 98798798, '1988-09-09', 35, 'F', 'Modalidad8', '2024-06-25', '2023-11-20', true),
-('José', 'Sánchez', 'González', 'Cédula', 45645678, '1992-04-18', 32, 'M', 'Modalidad9', '2024-06-25', '2023-10-30', true),
-('Lucía', 'Ruiz', 'López', 'DNI', 12398712, '1981-03-22', 43, 'F', 'Modalidad10', '2024-06-25', '2023-09-25', false);
 
+DELIMITER //
 
-select * from abipam.beneficiado;
+Create PROCEDURE ABIPAM.obtenerDatosCompletos()
+BEGIN
+    SELECT 
+		b.id_beneficiado,
+        CONCAT(b.nombre_1, ' ', b.apellido_1, ' ', b.apellido_2) AS Nombre_completo,
+        b.nombre_1,
+        b.apellido_1,
+        b.apellido_2,
+        b.tipo_identificacion AS Tipo_Identific,
+        b.num_identificacion AS Num_identifica,
+        b.fecha_nac AS Fecha_Nac,
+        b.edad AS Edad,
+        b.sexo AS Sexo,
+        b.modalidad AS Modalidad,
+        p.t_pension AS T_Pension,
+        p.mont_pension AS Mont_pension,
+        p.ley9188_est_actual_activo AS Ley9188_Est_actual_activo,
+        p.ley7972_est_actual_activo AS Ley7972_Est_actual_activo,
+        p.fecha_ingr_fallec AS Fecha_Ingr_fallec,
+        a.ley7972_monto_ayuda AS Ley7972_Monto_ayuda,
+        a.ley9188_monto_ayuda AS Ley9188_Monto_ayuda,
+        p.mes_lista AS Mes_lista,
+        p.fiscalizador AS Fiscalizador,
+        p.sinerube AS Sinirube,
+        a.alimentacion AS ALIMENTACION,
+        a.articulos_uso_personal_higiene AS ARTICULOS_DE_USO_PERSONAL_E_HIGIENE,
+        a.atencion_social_salud_integral AS ATENCION_SOCIAL_EN_SALUD_INTEGRAL,
+        a.productos_apoyo_ayudas_tecnicas AS PRODUCTOS_DE_APOYO_O_AYUDAS_TECNICAS,
+        a.equipamiento_casa AS EQUIPAMIENTO_DE_CASA,
+        a.alquiler_vivienda_servicios_basicos AS ALQUILER_DE_VIVIENDA_SERVICIOS_BASICOS_Y_MUNICIPALES,
+        a.familias_solidarias AS FAMILIAS_SOLIDARIAS,
+        a.asistente_domiciliar AS ASISTENTE_DOMICILIAR
+    FROM ABIPAM.beneficiado b
+    LEFT JOIN ABIPAM.pensiones p ON b.id_beneficiado = p.id_beneficiado
+    LEFT JOIN ABIPAM.ayuda a ON b.id_beneficiado = a.id_beneficiado
+    ORDER BY b.nombre_1, b.apellido_1, b.apellido_2;
+END //
 
-select * from abipam.pensiones;
+DELIMITER ;
 
 select * from abipam.ayuda;
+select * from abipam.pensiones;
 
-select * from abipam.usuario;
-
-
-
-
-INSERT INTO ABIPAM.lista_espera 
-    (primer_apellido, segundo_apellido, nombre, no_cedula, fecha_nacimiento, provincia, canton, distrito, direccion, telefono, fecha_ingreso, descripcion_problema, prioridad, fuente, edad, notificado_posicion_lista_espera, observacion, sinirubre_estado_justificacion)
-VALUES 
-    ('González', 'Pérez', 'María', '123456789', '1985-05-15', 'San José', 'San Pedro', 'Montes de Oca', 'Calle Principal 123', '2222-1111', '2024-07-03', 'Problema urgente de salud', 1, 'Hospital Nacional', 40, 'Sí', 'Necesita atención inmediata.', 'Justificación médica en proceso...'),
-    ('López', 'Sánchez', 'Juan', '987654321', '1992-10-20', 'Heredia', 'Barva', 'San Pablo', 'Avenida Central 456', '3333-2222', '2024-07-03', 'Consulta médica regular', 2, 'Clínica Local', 32, 'No', 'En seguimiento por especialista.', 'Justificación pendiente...'),
-    ('Martínez', 'Rodríguez', 'Pedro', '567890123', '1980-08-12', 'Alajuela', 'Alajuela', 'Alajuela Centro', 'Calle Norte 789', '4444-5555', '2024-07-03', 'Control de rutina', 3, 'Consultorio Médico', 44, 'Sí', 'Sin observaciones adicionales.', 'N/A');
-SELECT *
-FROM ABIPAM.lista_espera
-ORDER BY prioridad DESC;
-
-select * from abipam.beneficiado

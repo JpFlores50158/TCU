@@ -127,5 +127,13 @@ public class PensionController {
 
         return "redirect:/pension/listado";
     }
+    
+     @GetMapping("/actualizarTodo")
+    public String actualizarTodo() {
+
+      pensionService.updateAllPensionesFecha(LocalDate.now());
+
+        return "redirect:/pension/listado";
+    }
 
 }

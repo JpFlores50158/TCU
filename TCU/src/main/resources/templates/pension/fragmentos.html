@@ -31,14 +31,9 @@
                     </div>
                     <div class="col-md-4 my-3">
                         <div class="card text-center bg-success text-white">
-                            <div class="card-body">
-                                <h2>Filtrar Pension por Fecha</h2>
-                                <form th:action="@{/pension/filtrar}" th:object="${fechaForm}" method="get">
-                                    <label for="fecha">Selecciona una fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" required>
-                                        <button type="submit">Filtrar</button>
-                                </form>
-                            </div>
+                            <a th:href="@{/pension/actualizarTodo}" class="btn btn-success card-body">
+                                Actualizar a datos a fecha actual
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -127,7 +122,13 @@
         <section th:fragment="editarPension" id="editarPension">
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-md-8">
+                        <div class="col-md-4 d-grid my-4">
+                            <a th:href="@{/pension/listado}" class="btn btn-primary">
+                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                            </a>
+                        </div>
                         <form method="post" th:action="@{/pension/actualizar}" th:object="${pension}" class="was-validated"
                               enctype="multipart/form-data">
                             <input type="hidden" th:field="*{idPension}"/>
@@ -231,7 +232,13 @@
         <section th:fragment="agregarPension">
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-md-8">
+                        <div class="col-md-4 d-grid my-4">
+                            <a th:href="@{/pension/listado}" class="btn btn-primary">
+                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                            </a>
+                        </div>
                         <div class="card">
                             <div class="card-header bg-info text-white">
                                 <h5 class="card-title">Agregar Pensión</h5>
@@ -271,7 +278,7 @@
                                         <label for="tipoIngreFallec">Tipo fecha</label>
                                         <select class="form-control" id="tipoIngreFallec" name="tipoIngreFallec" required>
                                             <option value="Ingresado">Ingresado</option>
-                                            <option value="Fallesido">Fallesido</option>
+                                            <option value="Fallecido">Fallecido</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -307,129 +314,9 @@
 
 
 
-        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
-        <section th:fragment="botonesEditar">
-            <div class="container py-4 mb-4 bg-light">
-                <div class="row">
-                    <div class="col-md-4 d-grid">
-                        <a th:href="@{/categoria/listado}" class="btn btn-primary">
-                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
-                           class="btn btn-danger">
-                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
 
 
 
-        <section th:fragment="filtro" id="beneficiados">
 
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 my-3">
-                        <div class="card text-center bg-success text-white">
-                            <a th:href="@{/pension/listado}" class="btn btn-success card-body">
-                                Listado Mes Actual
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 my-3">
-                        <div class="card text-center bg-success text-white">
-                            <div class="card-body">
-                                <h5 class="m-0">[[#{beneficiado.total}]]: [[${totalBeneficiados}]]</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 my-3">
-                        <div class="card text-center bg-success text-white">
-                            <div class="card-body">
-                                <h2>Filtrar Beneficiados por Fecha</h2>
-                                <form  th:action="@{/beneficiado/filtrar}" th:object="${fechaForm}" method="get">
-                                    <label for="fecha">Selecciona una fecha:</label>
-                                    <input type="date" id="fecha" name="fecha"  required>
-                                        <button type="submit">Filtrar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Fecha buscada: [[${fecha}]]</h4>
-                            </div>
-                            <div th:if="${pensiones != null and !pensiones.empty}">
-                                <div class="table-responsive">
-                                    <table id="Table" class="table table-striped table-hover">
-                                        <thead style="background-color: peru; color:white">
-                                            <tr>
-                                               
-                                                <th>#</th>
-                                                <th>Beneficiado</th>
-                                                <th>Tipo de Pensión</th>
-                                                <th>Monto de Pensión</th>
-                                                <th>Ley 9188 Activo</th>
-                                                <th>Ley 7972 Activo</th>
-                                                <th>Tipo Fecha</th>
-                                                <th>Fecha </th>
-
-                                                <th>Mes Lista</th>
-                                                <th>Fiscalizador</th>
-                                                <th>Sinerube</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="pension, contador : ${pensiones}">
-                                               
-                                                <td>[[${contador.count}]]</td>
-                                                <td>[[${pension.beneficiado.nombre1}]] [[${pension.beneficiado.apellido1}]] [[${pension.beneficiado.apellido2}]]</td>
-                                                <td>[[${pension.tipoPension}]]</td>
-                                                <td>[[${pension.montoPension}]]</td>
-                                                <td th:classappend="${pension.ley9188EstadoActualActivo} ? 'text-success' : 'text-muted'">
-                                                    [[${pension.ley9188EstadoActualActivo} ? 'Activo' : 'Inactivo']]
-                                                </td>
-                                                <td th:classappend="${pension.ley7972EstadoActualActivo} ? 'text-success' : 'text-muted'">
-                                                    [[${pension.ley7972EstadoActualActivo} ? 'Activo' : 'Inactivo']]
-                                                </td>
-                                                <td>[[${pension.tipoIngreFallec}]]</td>
-                                                <td>[[${pension.fechaIngresoFallecimiento}]]</td>
-
-                                                <td>[[${pension.mesLista}]]</td>
-                                                <td>[[${pension.fiscalizador}]]</td>
-                                                <td>[[${pension.sinerube}]]</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="text-center p-2" th:if="${pensiones == null or pensiones.empty}">
-                                <span>[[#{lista.vacia}]]</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Inicialización de DataTables -->
-            <script>
-                $(document).ready(function () {
-                    $('#Table').DataTable({
-                        "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                        }
-                    });
-                });
-            </script>
-        </section>
     </body>
 </html>

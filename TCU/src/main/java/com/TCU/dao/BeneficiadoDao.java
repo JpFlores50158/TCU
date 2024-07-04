@@ -8,6 +8,7 @@ import com.TCU.domain.Beneficiado;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -30,14 +31,17 @@ public interface BeneficiadoDao extends JpaRepository<Beneficiado, Long> {
             + "WHERE NOT EXISTS (SELECT a FROM Ayuda a WHERE a.beneficiado = b) "
             + "AND MONTH(b.fecha) = MONTH(:selectedDate) AND YEAR(b.fecha) = YEAR(:selectedDate)")
     List<Beneficiado> findAllBeneficiadosWithoutAyudaAndInMonth(@Param("selectedDate") LocalDate selectedDate);
-    
-    
-      @Query("SELECT COUNT(b) FROM Beneficiado b "
+
+    @Query("SELECT COUNT(b) FROM Beneficiado b "
             + "WHERE b.numIdentificacion = :numIdentificacion "
             + "AND MONTH(b.fecha) = MONTH(:selectedDate) "
             + "AND YEAR(b.fecha) = YEAR(:selectedDate)")
     int countByNumIdentificacionAndMonth(
             @Param("numIdentificacion") long numIdentificacion,
             @Param("selectedDate") LocalDate selectedDate);
+
+    @Modifying
+    @Query("UPDATE Beneficiado b SET b.fecha = :newDate")
+    int updateAllBeneficiadosFecha(@Param("newDate") LocalDate newDate);
 
 }
