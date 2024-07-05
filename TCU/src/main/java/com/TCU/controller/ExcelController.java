@@ -31,7 +31,7 @@ public class ExcelController {
    
     @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadExcelFile() {
-        ByteArrayInputStream bis = excelService.generateExcel();
+        ByteArrayInputStream bis = excelService.generateBeneficiadosExcel();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=Planilla_CONAPAM_Red_de_Heredia-" + LocalDate.now().format(DateTimeFormatter.ofPattern("MM-yyyy")) + ".xlsx");

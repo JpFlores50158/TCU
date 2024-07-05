@@ -21,5 +21,7 @@ public interface BeneficiadoService {
     public List<Beneficiado> findAllBeneficiadosWithoutAyudaInMonth();
 
     public void updateAllBeneficiadosFecha(LocalDate newDate);
+    
+     public List<Beneficiado> getBeneficiadosOrdenado(LocalDate date);
 
 }

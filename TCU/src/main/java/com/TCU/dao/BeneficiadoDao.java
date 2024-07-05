@@ -37,11 +37,16 @@ public interface BeneficiadoDao extends JpaRepository<Beneficiado, Long> {
             + "AND MONTH(b.fecha) = MONTH(:selectedDate) "
             + "AND YEAR(b.fecha) = YEAR(:selectedDate)")
     int countByNumIdentificacionAndMonth(
-            @Param("numIdentificacion") long numIdentificacion,
+            @Param("numIdentificacion") String numIdentificacion,
             @Param("selectedDate") LocalDate selectedDate);
 
     @Modifying
     @Query("UPDATE Beneficiado b SET b.fecha = :newDate")
     int updateAllBeneficiadosFecha(@Param("newDate") LocalDate newDate);
-
+    
+    @Query("SELECT b.sexo, COUNT(b) FROM Beneficiado b GROUP BY b.sexo")
+    List<Object[]> countBySexo();
+    
+ @Query("SELECT b FROM Beneficiado b WHERE MONTH(b.fecha) = MONTH(:selectedDate) AND YEAR(b.fecha) = YEAR(:selectedDate) ORDER BY b.nombre1, b.apellido1, b.apellido2")
+    List<Beneficiado> findBySelectedMonthOrdenado(@Param("selectedDate") LocalDate selectedDate);
 }

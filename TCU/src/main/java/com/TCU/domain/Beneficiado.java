@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class Beneficiado implements Serializable {
      @Column(name = "apellido_2")
     private String apellido2;
     private String tipoIdentificacion;
-    private long numIdentificacion;
+    private String numIdentificacion;
     private String fechaNac;
     private int edad;
     private String sexo;
@@ -51,10 +52,12 @@ public class Beneficiado implements Serializable {
     
     @OneToMany
     @JoinColumn(name = "id_beneficiado",updatable=false)
+     @OrderBy("nombre1, apellido1, apellido2")
     private List<Pension> pensiones;
      
     @OneToMany
     @JoinColumn(name = "id_beneficiado",updatable=false)
+     @OrderBy("nombre1, apellido1, apellido2")
     private List<Ayuda> ayudas;
 
 

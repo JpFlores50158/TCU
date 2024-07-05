@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDate;
 import lombok.Data;
 
 /**
@@ -33,7 +34,7 @@ public class Actividad implements Serializable {
     private String organizacion;
 
     @Column(name = "fecha")
-    private String fecha;
+    private LocalDate fecha;
 
     @Column(name = "tipo_actividad")
     private String tipoActividad;

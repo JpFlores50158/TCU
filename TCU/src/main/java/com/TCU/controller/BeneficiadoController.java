@@ -99,7 +99,7 @@ public class BeneficiadoController {
         beneficiado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
 
         // Verificar si ya existe más de un beneficiado con el mismo número de identificación en el mes actual
-        long numIdentificacion = beneficiado.getNumIdentificacion();
+        String numIdentificacion = beneficiado.getNumIdentificacion();
         int count = beneficiadoDao.countByNumIdentificacionAndMonth(numIdentificacion,LocalDate.now());
         
         // Si hay más de un beneficiado con el mismo número de identificación en el mes actual, manejar el error

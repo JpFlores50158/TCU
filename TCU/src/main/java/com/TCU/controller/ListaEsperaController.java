@@ -107,7 +107,7 @@ public class ListaEsperaController {
         beneficiado.setApellido1(resultado.getPrimerApellido());
         beneficiado.setApellido2(resultado.getSegundoApellido());
         beneficiado.setTipoIdentificacion("Cedula");
-        beneficiado.setNumIdentificacion(Long.parseLong(resultado.getNoCedula()));
+        beneficiado.setNumIdentificacion(resultado.getNoCedula());
         beneficiado.setFechaNac(resultado.getFechaNacimiento());
         beneficiado.setEdad(resultado.getEdad());
         beneficiado.setSexo("M");

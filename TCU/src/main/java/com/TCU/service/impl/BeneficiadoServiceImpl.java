@@ -66,5 +66,12 @@ public class BeneficiadoServiceImpl implements BeneficiadoService {
     public void updateAllBeneficiadosFecha(LocalDate newDate) {
         beneficiadoDao.updateAllBeneficiadosFecha(newDate);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Beneficiado> getBeneficiadosOrdenado(LocalDate date) {
+        return beneficiadoDao.findBySelectedMonthOrdenado(date);
+    }
+
 
 }

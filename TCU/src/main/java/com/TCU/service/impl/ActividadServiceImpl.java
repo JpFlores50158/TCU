@@ -30,13 +30,18 @@ public class ActividadServiceImpl implements ActividadService {
         return actividadDao.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Actividad> getActividadesAno() {
+        return actividadDao.findActividadesDelAnoActual();
+    }
+
     @Override
     public Actividad getActividad(Actividad actividad) {
         return actividadDao.findById(actividad.getIdActividad()).orElse(null);
     }
 
     @Override
-    public void save(Actividad actividad) {
+    public void save(Actividad actividad) { 
         actividadDao.save(actividad);
     }
 

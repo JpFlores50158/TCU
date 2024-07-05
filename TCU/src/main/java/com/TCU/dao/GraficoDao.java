@@ -4,8 +4,7 @@
  */
 package com.TCU.dao;
 
-
-import com.TCU.domain.ExcelJoin;
+import com.TCU.domain.Grafico;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -14,9 +13,8 @@ import org.springframework.data.jpa.repository.query.Procedure;
  *
  * @author jp09f
  */
-public interface ExcelJoinDao  extends JpaRepository<ExcelJoin, Long> {
+public interface GraficoDao extends JpaRepository<Grafico, String> {
     
-      @Procedure(name = "obtenerDatosCompletos")
-    List<ExcelJoin> obtenerDatosCompletos();
+      @Procedure(name = "grafico")
+    List<Grafico> grafico();
 }
- 

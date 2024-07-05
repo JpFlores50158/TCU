@@ -95,7 +95,7 @@ CREATE TABLE ABIPAM.ayuda (
     familias_solidarias DECIMAL(15, 2) NOT NULL,
     asistente_domiciliar DECIMAL(15, 2) NOT NULL,
     ley7972_monto_ayuda DECIMAL(15, 2) NOT NULL,
-    ley9188_monto_ayuda DECIMAL(15, 2) NOT NULL,
+    ley9188_monto_ayuda DECIMAL(15, 2) NOT NULL /* suma todos los datos */,
     fecha DATE NOT NULL,
     estado BOOLEAN NOT NULL,
     PRIMARY KEY (id_ayuda),
@@ -166,46 +166,40 @@ insert into ABIPAM.rol (id_rol, nombre_rol, id_usuario) values
 
 DELIMITER //
 
-Create PROCEDURE ABIPAM.obtenerDatosCompletos()
+Create PROCEDURE ABIPAM.grafico()
 BEGIN
-    SELECT 
-		b.id_beneficiado,
+   SELECT 
         CONCAT(b.nombre_1, ' ', b.apellido_1, ' ', b.apellido_2) AS Nombre_completo,
-        b.nombre_1,
-        b.apellido_1,
-        b.apellido_2,
-        b.tipo_identificacion AS Tipo_Identific,
-        b.num_identificacion AS Num_identifica,
-        b.fecha_nac AS Fecha_Nac,
-        b.edad AS Edad,
-        b.sexo AS Sexo,
-        b.modalidad AS Modalidad,
-        p.t_pension AS T_Pension,
-        p.mont_pension AS Mont_pension,
-        p.ley9188_est_actual_activo AS Ley9188_Est_actual_activo,
-        p.ley7972_est_actual_activo AS Ley7972_Est_actual_activo,
-        p.fecha_ingr_fallec AS Fecha_Ingr_fallec,
-        a.ley7972_monto_ayuda AS Ley7972_Monto_ayuda,
-        a.ley9188_monto_ayuda AS Ley9188_Monto_ayuda,
-        p.mes_lista AS Mes_lista,
-        p.fiscalizador AS Fiscalizador,
-        p.sinerube AS Sinirube,
-        a.alimentacion AS ALIMENTACION,
-        a.articulos_uso_personal_higiene AS ARTICULOS_DE_USO_PERSONAL_E_HIGIENE,
-        a.atencion_social_salud_integral AS ATENCION_SOCIAL_EN_SALUD_INTEGRAL,
-        a.productos_apoyo_ayudas_tecnicas AS PRODUCTOS_DE_APOYO_O_AYUDAS_TECNICAS,
-        a.equipamiento_casa AS EQUIPAMIENTO_DE_CASA,
-        a.alquiler_vivienda_servicios_basicos AS ALQUILER_DE_VIVIENDA_SERVICIOS_BASICOS_Y_MUNICIPALES,
-        a.familias_solidarias AS FAMILIAS_SOLIDARIAS,
-        a.asistente_domiciliar AS ASISTENTE_DOMICILIAR
+        b.num_identificacion AS cedula,
+        COALESCE(a.ley9188_monto_ayuda, 0) AS monto_ayuda
     FROM ABIPAM.beneficiado b
-    LEFT JOIN ABIPAM.pensiones p ON b.id_beneficiado = p.id_beneficiado
-    LEFT JOIN ABIPAM.ayuda a ON b.id_beneficiado = a.id_beneficiado
-    ORDER BY b.nombre_1, b.apellido_1, b.apellido_2;
+    LEFT JOIN ABIPAM.ayuda a ON b.id_beneficiado = a.id_beneficiado;
+
 END //
 
 DELIMITER ;
 
-select * from abipam.ayuda;
-select * from abipam.pensiones;
+DELIMITER //
+
+Create PROCEDURE ABIPAM.PromedioEdadDecada()
+BEGIN
+   SELECT
+    FLOOR(edad / 10) * 10 AS decada,
+    COUNT(*) AS cantidad_beneficiados,
+    ROUND((COUNT(*) / (SELECT COUNT(*) FROM ABIPAM.beneficiado)) * 100, 2) AS porcentaje
+FROM
+    ABIPAM.beneficiado
+GROUP BY
+    FLOOR(edad / 10)
+ORDER BY
+    decada;
+
+END //
+
+DELIMITER ;
+
+
+
+
+
 
