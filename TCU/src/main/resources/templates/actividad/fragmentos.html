@@ -48,10 +48,10 @@
                                                 <td>
                                                     <a th:href="@{/actividad/eliminar/}+${actividad.idActividad}"
                                                        class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminarlo?');">
-                                                        <i class="fas fa-trash"></i> Eliminar</a>
+                                                        <i class="fas fa-trash"></i> </a>
                                                     <a th:href="@{/actividad/modificar/}+${actividad.idActividad}"
                                                        class="btn btn-success" >
-                                                        <i class="fas fa-pencil"></i> Modificar</a>
+                                                        <i class="fas fa-pencil"></i></a>
                                                 </td>
                                                 <td>[[${contador.count}]]</td>
                                                 <td>[[${actividad.organizacion}]]</td>
@@ -93,11 +93,16 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
+                         <div class="col-md-1 d-grid my-4">
+                            <a th:href="@{/actividad/listado}" class="btn btn-success">
+                                <i class="fas fa-arrow-left"></i> 
+                            </a>
+                        </div>
                         <form method="post" th:action="@{/actividad/actualizar}" th:object="${actividad}" class="was-validated" enctype="multipart/form-data">
                             <input type="hidden" th:field="*{idActividad}" /> 
 
                             <div class="card">
-                                <div class="card-header bg-info text-white">
+                                <div class="card-header  text-white" style="background-color: peru">
                                     <h5 class="card-title">Editar Actividad</h5>
                                 </div>
                                 <div class="card-body">
@@ -108,7 +113,8 @@
 
                                     <div class="mb-3">
                                         <label for="fecha" class="form-label">Fecha</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha" th:value="${fecha}" required>
+                                        <input type="date" class="form-control" id="fecha" name="fecha" th:value="${fecha}" required
+                                                th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                                     </div>
 
                                     <div class="form-group">
@@ -123,7 +129,7 @@
                                             <option value="socialización" th:selected="${actividad.tipoActividad == 'socialización'}">Socialización</option>
                                             <option value="ejercicio físico" th:selected="${actividad.tipoActividad == 'ejercicio físico'}">Ejercicio Físico</option>
                                             <option value="capacitación" th:selected="${actividad.tipoActividad == 'capacitación'}">Capacitación</option>
-                                              <option value="otro" th:selected="${actividad.tipoActividad == 'otro'}">Otro</option>
+                                            <option value="otro" th:selected="${actividad.tipoActividad == 'otro'}">Otro</option>
                                         </select>
                                     </div>
 
@@ -157,11 +163,12 @@
                                         <label for="personasMayores65" class="form-label">Personas Mayores de 65</label>
                                         <input type="number" class="form-control" id="personasMayores65" name="personasMayores65" th:field="*{personasMayores65}" required>
                                     </div>
+                                     <div class="form-group mb-5" style="display: flex; justify-content: center;">
+                                <button type="submit" class="btn btn-primary" style="width: 50%">Actualizar</button>
+                            </div>
                                 </div>
                             </div>
-                            <div class="form-group mt-3" style="display: flex; justify-content: center;">
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
-                            </div>
+                          
                         </form>
                     </div>
                 </div>
@@ -175,8 +182,13 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
+                        <div class="col-md-1 d-grid my-4">
+                            <a th:href="@{/actividad/listado}" class="btn btn-success">
+                                <i class="fas fa-arrow-left"></i> 
+                            </a>
+                        </div>
                         <div class="card">
-                            <div class="card-header bg-info text-white">
+                            <div class="card-header  text-white" style="background-color: peru">
                                 <h5 class="card-title">Agregar Actividad</h5>
                             </div>
                             <div class="card-body">
@@ -188,7 +200,8 @@
 
                                     <div class="form-group">
                                         <label for="fecha">Fecha</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha"  required>
+                                        <input type="date" class="form-control" id="fecha" name="fecha"  required
+                                               th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                                     </div>
 
                                     <div class="form-group">
@@ -203,7 +216,6 @@
                                             <option value="socialización">Socialización</option>
                                             <option value="ejercicio físico">Ejercicio Físico</option>
                                             <option value="capacitación">Capacitación</option>
-                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div>
 
@@ -238,8 +250,11 @@
                                         <input type="number" class="form-control" id="personasMayores65" name="personasMayores65"  value="0" required>
                                     </div>
 
-                                    <div class="form-group" style="display: flex; justify-content: center;">
-                                        <button type="submit" style="width: 50%; display: flex; justify-content: center;" class="btn btn-primary my-5">Guardar</button>
+                                    <div class="form-group" style="display: flex;
+                                         justify-content: center;">
+                                        <button type="submit" style="width: 50%;
+                                                display: flex;
+                                                justify-content: center;" class="btn btn-success my-5">Guardar</button>
                                     </div>
                                 </form>
                             </div>

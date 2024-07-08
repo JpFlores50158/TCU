@@ -15,10 +15,7 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
-/**
- *
- * @author jp09f
- */
+
 @Data
 @Entity
 @Table(name = "usuario")

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/springframework/Controller.java to edit this template
- */
 package com.TCU.controller;
 
 import com.TCU.dao.AyudaDao;
@@ -12,14 +8,11 @@ import com.TCU.domain.Beneficiado;
 import com.TCU.domain.Pension;
 import com.TCU.service.BeneficiadoService;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.YearMonth;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- *
- * @author jp09f
- */
+
 @Controller
 @RequestMapping("/beneficiado")
 public class BeneficiadoController {
@@ -98,11 +88,11 @@ public class BeneficiadoController {
         LocalDate fechaNacimiento = LocalDate.parse(beneficiado.getFechaNac());
         beneficiado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
 
-        // Verificar si ya existe más de un beneficiado con el mismo número de identificación en el mes actual
+        
         String numIdentificacion = beneficiado.getNumIdentificacion();
         int count = beneficiadoDao.countByNumIdentificacionAndMonth(numIdentificacion,LocalDate.now());
         
-        // Si hay más de un beneficiado con el mismo número de identificación en el mes actual, manejar el error
+      
         if (count > 0) {
               attributes.addFlashAttribute("error", "Ya existe un beneficiado con el mismo número de identificación en este mes.");
             return "redirect:/beneficiado/nuevo";

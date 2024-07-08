@@ -4,6 +4,10 @@
     <head th:replace="~{layout/plantilla :: head}"></head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"></header>
-        <section th:replace="~{layout/plantilla :: contenido}"></section>        
+      
+        <section sec:authorize="!isAuthenticated()" th:replace="~{layout/plantilla :: contenido}"></section>   
+        <section sec:authorize="isAuthenticated()" th:replace="~{layout/plantilla :: contenido2}"></section>  
+        <section th:replace="~{layout/plantilla :: boton}"></section>   
+        
     </body>
 </html>

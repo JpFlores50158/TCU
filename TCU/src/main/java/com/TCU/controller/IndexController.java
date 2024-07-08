@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/springframework/Controller.java to edit this template
- */
+
 package com.TCU.controller;
 
 import com.TCU.dao.UsuarioDao;
@@ -10,8 +7,6 @@ import com.TCU.domain.Usuario;
 
 import com.TCU.service.impl.ReporteService;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,8 +42,8 @@ public class IndexController {
             httpSession.setAttribute("Rol", usuario.getRol().getNombreRol());
         }
 
-        var sumaAyuda = reporteService.getSumaAyuda();
-        var promedioAyuda = reporteService.getPromedioAyuda();
+        var sumaAyuda = Double.parseDouble(reporteService.getSumaAyuda());
+        var promedioAyuda = Double.parseDouble(reporteService.getPromedioAyuda()); 
         var cantidadXDecada = reporteService.getPromedioEdadDecada();
         var totalHyM = reporteService.getCountBySexo();
         var sumaBitacora = reporteService.getSumaBitacora();

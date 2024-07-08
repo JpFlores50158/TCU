@@ -1,8 +1,6 @@
 package com.TCU.service.impl;
 
-import com.TCU.dao.RolDao;
 import com.TCU.dao.UsuarioDao;
-import com.TCU.domain.Rol;
 import com.TCU.domain.Usuario;
 import com.TCU.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;

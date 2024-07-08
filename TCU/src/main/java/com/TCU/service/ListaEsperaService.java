@@ -1,7 +1,7 @@
 package com.TCU.service;
 
 import com.TCU.domain.ListaEspera;
-import java.time.LocalDate;
+
 import java.util.List;
 
 public interface ListaEsperaService {

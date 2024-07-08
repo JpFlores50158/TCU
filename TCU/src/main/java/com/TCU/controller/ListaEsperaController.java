@@ -1,34 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/springframework/Controller.java to edit this template
- */
 package com.TCU.controller;
 
 import com.TCU.domain.Beneficiado;
 import com.TCU.domain.ListaEspera;
 import com.TCU.service.BeneficiadoService;
 import com.TCU.service.ListaEsperaService;
-import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.YearMonth;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author jp09f
- */
 @Controller
 @RequestMapping("/listaEspera")
 public class ListaEsperaController {

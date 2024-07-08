@@ -38,51 +38,6 @@
                     background-color: #fffce5;
                 }
 
-                .figura {
-                    position: relative;
-                    display: inline-block;
-                    margin: 20px;
-                }
-
-                .botonImagen {
-                    width: 180px;
-                    height: 70px;
-                    border-radius: 10px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    border: none;
-                    background-color: rgba(255, 255, 255, 0.35);
-                    font-weight: bold;
-                    font-size: 25px;
-                }
-
-                .botonImagen:hover {
-                    background-color: white;
-                    width: 200px;
-                    height: 90px;
-                    font-size: 30px;
-                    transition: 0.5s;
-                }
-
-                #dvImagenes {
-                    display: flex;
-                    justify-content: center;
-                }
-
-                #blurImagen {
-                    filter: blur(1.5px);
-                }
-
-                .filtro {
-                    font-size: 20px;
-                }
-
-                .filtro:hover {
-                    font-size: 22px;
-                    font-weight: bold;
-                }
 
                 .auth-buttons {
                     display: flex;
@@ -101,7 +56,7 @@
                     z-index: 99; /* Asegurarse de que se muestre por encima de otros elementos */
                     border: none; /* Sin borde */
                     outline: none; /* Sin borde al hacer clic */
-                    background-color: #4CAF50; /* Color de fondo */
+                    background-color: peru; /* Color de fondo */
                     color: white; /* Color del texto */
                     cursor: pointer; /* Cursor de mano */
                     padding: 15px; /* Relleno */
@@ -110,439 +65,507 @@
 
                 #backToTopBtn:hover {
                     background-color: #555; /* Cambiar color al pasar el mouse */
-
-                </style>
-
-                <script>
-
-
-                </script>
-
-
-        </head>
-        <body>
-            <header class="header" style="background-color:  peru;
+                }
+                .header {
+                    background-color: peru;
                     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-                    padding:1% 0;">
-                <div class="container-fluid d-flex justify-content-between align-items-center"> 
+                    padding: 2% 5%;
+                }
+                .navbar-brand h3 {
+                    margin-bottom: 0;
+                }
+                .navbar-nav .nav-link {
+                    color: white;
+                }
+                .auth-buttons .nav-link,
+                .auth-buttons .btn-link {
+                    color: white;
+                }
+                .auth-buttons .nav-item.dropdown .nav-link {
+                    display: flex;
+                    align-items: center;
+                }
+                .auth-buttons .nav-item.dropdown .nav-link i {
+                    margin-right: 5px;
+                }
+                .navbar .container-fluid {
+                    justify-content: space-between;
+                }
+                .navbar-nav {
+                    align-items: center;
+                }
+                .nav-item .username {
+                    color: white;
+                }
+                .navbar-toggler {
+                    border: none;
+                }
 
-                    <div class="col-md-12">
-                        <nav class="navbar navbar-expand-sm" >
-                            <div class="col-md-2"></div>
-                            <div class="col-md-2">
-                                <a href="/"  style="display:flex;
-                                   align-content: center;
-                                   flex-wrap: wrap" class="navbar-brand text-white">
-                                       <h3 class="mb-5">ABIPAM</h3>
-                                   </a>
-                                </div>
-
-                                <div class="col-md-7">
-                                    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-                                        <ul class="navbar-nav">
-
-                                            <li class="nav-item px-2" sec:authorize="isAuthenticated()">
-                                                <a class="nav-link" href="/beneficiado/listado"><span>Beneficados</span></a>
-                                            </li>
-                                            <li class="nav-item px-2" sec:authorize="isAuthenticated()">
-                                                <a class="nav-link" href="/pension/listado"><span>Pensiones</span></a>
-                                            </li>
-                                            <li class="nav-item px-2" sec:authorize="isAuthenticated()">
-                                                <a class="nav-link" href="/ayuda/listado"><span>Ayuda</span></a>
-                                            </li>
-                                            <li class="nav-item px-2" sec:authorize="isAuthenticated()">
-                                                <a class="nav-link" href="/actividad/listado"><span>Actividades</span></a>
-                                            </li>
-                                            <li class="nav-item px-2" sec:authorize="isAuthenticated()">
-                                                <a class="nav-link" href="/listaEspera/listado"><span>Lista espera</span></a>
-                                            </li>
-
-                                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
-                                                <a class="nav-link" href="/admin/usuarios/listado"><span>Usuarios</span></a>
-                                            </li>
-                                          
-                                        </ul>
-                                        <!-- Botones de autenticación -->
-                                        <div class="auth-buttons ml-auto">
-                                            <ul class="navbar-nav">
-                                                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                                                    <a class="nav-link" href="/login"><span>Ingresar</span></a>
-                                                </li>
-                                                <li class="nav-item" sec:authorize="isAuthenticated()">
-                                                    <form method="POST"th:action="@{/logout}">
-                                                        <button type="submit" class="btn btn-link nav-link"><span>Salir</span></button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                            <ul class="navbar-nav">
-                                                <li class="nav-item dropdown text-center">
-                                                    <div class="d-flex" sec:authorize="isAuthenticated()">
-                                                        <a class="nav-link" href="/perfil/mostrar"><i class="fa-solid fa-circle-user fa-lg" style="margin-right: 20px;"></i></a>
-                                                    <span class="nav-link" style="color:white;"><span sec:authentication="name">Username</span></span>
-                                                </div>
-
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </nav>
-                    </div>
-                </div>
-            </header>
+            </style>
 
 
 
 
-
-
-            <section th:fragment="contenido" style="overflow: auto;" >
-
-                <div class="container" sec:authorize="!isAuthenticated()">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header bg-info text-white">
-                                    <h5 class="card-title">Agregar Actividad</h5>
-                                </div>
-                                <div class="card-body">
-                                    <form th:action="@{/actividad/guardar}" method="post" class="was-validated" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="organizacion">Organización</label>
-                                            <input type="text" class="form-control" id="organizacion" name="organizacion"  required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="fecha">Fecha</label>
-                                            <input type="date" class="form-control" id="fecha" name="fecha"  required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="tipoActividad">Tipo de Actividad</label>
-                                            <select class="form-control" id="tipoActividad" name="tipoActividad" required>
-                                                <option value="" disabled selected>Seleccione una opción</option>
-                                                <option value="recreativa">Recreativa</option>
-                                                <option value="emprendedurismo">Emprendedurismo</option>
-                                                <option value="derechos humanos">Derechos Humanos</option>
-                                                <option value="prevención violencia">Prevención de Violencia</option>
-                                                <option value="apoyo emocional">Apoyo Emocional</option>
-                                                <option value="socialización">Socialización</option>
-                                                <option value="ejercicio físico">Ejercicio Físico</option>
-                                                <option value="capacitación">Capacitación</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="ninos0a5">Niños 0-5</label>
-                                            <input type="number" class="form-control" id="ninos0a5" name="ninos0a5"  value="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="ninos5a12">Niños 5-12</label>
-                                            <input type="number" class="form-control" id="ninos5a12" name="ninos5a12"  value="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="adolescentes">Adolescentes</label>
-                                            <input type="number" class="form-control" id="adolescentes" name="adolescentes" value="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="adultoHombre">Adultos Hombres</label>
-                                            <input type="number" class="form-control" id="adultoHombre" name="adultoHombre"  value="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="adultoMujer">Adultos Mujeres</label>
-                                            <input type="number" class="form-control" id="adultoMujer" name="adultoMujer"  value="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="personasMayores65">Personas Mayores de 65</label>
-                                            <input type="number" class="form-control" id="personasMayores65" name="personasMayores65"  value="0" required>
-                                        </div>
-
-                                        <div class="form-group" style="display: flex;
-                                             justify-content: center;">
-                                            <button type="submit" style="width: 50%;
-                                                    display: flex;
-                                                    justify-content: center;" class="btn btn-primary my-5">Guardar</button>
-                                        </div>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a href="/" class="navbar-brand text-white d-flex align-items-center">
+                        <h3>ABIPAM</h3>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/beneficiado/listado">Beneficiados</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/pension/listado">Pensiones</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/ayuda/listado">Ayuda</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/actividad/listado">Actividades</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/listaEspera/listado">Lista espera</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-link" href="/admin/usuarios/listado">Usuarios</a>
+                            </li>
+                        </ul>
+                        <div class="auth-buttons d-flex align-items-center">
+                            <ul class="navbar-nav me-3">
+                                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                                    <a class="nav-link" href="/login">Ingresar</a>
+                                </li>
+                                <li class="nav-item" sec:authorize="isAuthenticated()">
+                                    <form method="POST" th:action="@{/logout}">
+                                        <button type="submit" class="btn btn-link nav-link">Salir</button>
                                     </form>
-                                </div>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown text-center text-white" sec:authorize="isAuthenticated()">
+                                   
+                                        <i class="fas fa-circle-user fa-lg"></i>
+                                        <span class="username ms-1">
+                                            <span sec:authentication="name">Username</span>
+                                        </span>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+
+
+
+        <section th:fragment="contenido" style="overflow: auto;" >
+
+            <div class="container mt-4" sec:authorize="!isAuthenticated()">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header  text-white" style="background-color: peru">
+                                <h5 class="card-title">Agregar Actividad</h5>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/actividad/guardar}" method="post" class="was-validated" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="organizacion">Organización</label>
+                                        <input type="text" class="form-control" id="organizacion" name="organizacion"  required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha</label>
+                                        <input type="date" class="form-control" id="fecha" name="fecha"  required
+                                               th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tipoActividad">Tipo de Actividad</label>
+                                        <select class="form-control" id="tipoActividad" name="tipoActividad" required>
+                                            <option value="" disabled selected>Seleccione una opción</option>
+                                            <option value="recreativa">Recreativa</option>
+                                            <option value="emprendedurismo">Emprendedurismo</option>
+                                            <option value="derechos humanos">Derechos Humanos</option>
+                                            <option value="prevención violencia">Prevención de Violencia</option>
+                                            <option value="apoyo emocional">Apoyo Emocional</option>
+                                            <option value="socialización">Socialización</option>
+                                            <option value="ejercicio físico">Ejercicio Físico</option>
+                                            <option value="capacitación">Capacitación</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="ninos0a5">Niños 0-5</label>
+                                        <input type="number" class="form-control" id="ninos0a5" name="ninos0a5"  value="0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ninos5a12">Niños 5-12</label>
+                                        <input type="number" class="form-control" id="ninos5a12" name="ninos5a12"  value="0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="adolescentes">Adolescentes</label>
+                                        <input type="number" class="form-control" id="adolescentes" name="adolescentes" value="0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="adultoHombre">Adultos Hombres</label>
+                                        <input type="number" class="form-control" id="adultoHombre" name="adultoHombre"  value="0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="adultoMujer">Adultos Mujeres</label>
+                                        <input type="number" class="form-control" id="adultoMujer" name="adultoMujer"  value="0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="personasMayores65">Personas Mayores de 65</label>
+                                        <input type="number" class="form-control" id="personasMayores65" name="personasMayores65"  value="0" required>
+                                    </div>
+
+                                    <div class="form-group" style="display: flex;
+                                         justify-content: center;">
+                                        <button type="submit" style="width: 50%;
+                                                display: flex;
+                                                justify-content: center;" class="btn btn-success my-5">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="container" sec:authorize="isAuthenticated()">
-                    <div class="row">
-                        <div class="col-md-12 my-3">
-                            <div class="card text-center bg-success text-white mb-1">
-                                <a th:href="@{/excel/download}" class="btn btn-success card-body">
-                                    <i class="fas fa-add"></i> Descargar Excel del mes
-                                </a>
-                            </div>
-                            <div class="col-md-12">
-                                <h1>BENEFICIADOS</h1>
-                                <div class="row">
+            </div>
+           
+        </section>
 
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header" style="background-color: peru;
-                                                 color: white;">
-                                                <h4>Totales por Sexo</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table id="totalesHyMTable" class="table table-striped table-hover">
-                                                        <thead style="background-color: peru;
-                                                               color: white;">
-                                                            <tr>
-                                                                <th>Sexo</th>
-                                                                <th>Cantidad</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr th:each="total : ${totalesHyM}">
-                                                                <td>
-                                                                    <span th:if="${total[0] == 'M'}">Mujeres</span>
-                                                                    <span th:if="${total[0] == 'H'}">Hombres</span>
-                                                                </td>
-                                                                <td th:text="${total[1]}"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+        
+        <section th:fragment="contenido2">
+             <div class="container" sec:authorize="isAuthenticated()">
+                <div class="row">
+                    <div class="col-md-12 my-3">
+                        <div class="card text-center bg-success text-white mb-1">
+                            <a th:href="@{/excel/download}" class="btn btn-success card-body">
+                                <i class="fas fa-add"></i> Descargar Excel del mes
+                            </a>
+                        </div>
+                        <div class="col-md-12">
+                            <h2 class="mt-4 text-center">Reportes beneficiados</h2>
+                            <hr/>
+                            <div class="row">
 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header" style="background-color: peru;
-                                                 color: white;">
-                                                <h4>Promedio por decada</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table id="totalesHyMTable" class="table table-striped table-hover">
-                                                        <thead style="background-color: peru;
-                                                               color: white;">
-                                                            <tr>
-                                                                <th>Decada</th>
-                                                                <th>Cantidad</th>
-                                                                <th>Promedio</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr th:each="entry : ${cantidadXDecada}">
-                                                                <td>[[${entry.decada}]]</td> 
-                                                                <td>[[${entry.cantidad}]]</td> 
-                                                                <td>[[${entry.porcentaje}]]%</td> 
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                <div class="col-md-6">
+                                    <div >
+                                        <div class=" p-2 rounded " style="background-color: peru;
+                                             color: white;">
+                                            <h4>Totales por Sexo</h4>
                                         </div>
-
-                                    </div>
-                                    <div class=" col-md-6 my-3">
-                                        <div class="card text-center bg-success text-white">
-                                            <div class="card-body">
-                                                <h5 class="m-0">Total gastado en ayudas: ₡ [[${sumaAyuda}]]</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 my-3">
-                                        <div class="card text-center bg-success text-white">
-                                            <div class="card-body">
-                                                <h5 class="m-0">Promedio gastado en ayudas: ₡ [[${promedioAyuda}]]</h5>
+                                        <div>
+                                            <div class="table-responsive " >
+                                                <table id="totalesHyMTable" class="table  table-hover mt-4">
+                                                    <thead style="background-color: peru;
+                                                           color: white;">
+                                                        <tr>
+                                                            <th>Sexo</th>
+                                                            <th>Cantidad</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="total : ${totalesHyM}">
+                                                            <td>
+                                                                <span th:if="${total[0] == 'M'}">Mujeres</span>
+                                                                <span th:if="${total[0] == 'H'}">Hombres</span>
+                                                            </td>
+                                                            <td th:text="${total[1]}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <div class=" p-2 rounded " style="background-color: peru;
+                                             color: white;">
+                                            <h4>Promedio por decada</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="totalesHyMTable" class="table  table-hover mt-4">
+                                                    <thead style="background-color: peru;
+                                                           color: white;">
+                                                        <tr>
+                                                            <th>Decada</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Promedio</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="entry : ${cantidadXDecada}">
+                                                            <td>[[${entry.decada}]]</td> 
+                                                            <td>[[${entry.cantidad}]]</td> 
+                                                            <td>[[${entry.porcentaje}]]%</td> 
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class=" col-md-6 my-3">
+                                    <div class="card text-center bg-success text-white">
+                                        <div class="card-body">
+                                            <h5 class="m-0">Total gastado en ayudas: ₡  [[${#numbers.formatDecimal(sumaAyuda, 1, 'DEFAULT', 2, 'DEFAULT')}]]</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 my-3">
+                                    <div class="card text-center bg-success text-white">
+                                        <div class="card-body">
+                                            <h5 class="m-0">Promedio gastado en ayudas: ₡  [[${#numbers.formatDecimal(promedioAyuda, 1, 'DEFAULT', 2, 'DEFAULT')}]]</h5>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
 
 
-                                    <canvas id="grafico"></canvas>
-                                    <script th:inline="javascript">
-                                        var nombres = /*[[${grafico.![nombreCompleto]}]]*/ [];
-                                        var cedulas = /*[[${grafico.![cedula]}]]*/ [];
-                                        var montosAyuda = /*[[${grafico.![montoAyuda]}]]*/ [];
 
-                                        var ctx = document.getElementById('grafico').getContext('2d');
-                                        var myChart = new Chart(ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: cedulas, // Usamos las cédulas como etiquetas
-                                                datasets: [{
-                                                        label: 'Monto de Ayuda según Ley 9188',
-                                                        data: montosAyuda,
-                                                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                                        borderColor: 'rgba(54, 162, 235, 1)',
-                                                        borderWidth: 1
-                                                    }]
+                                <canvas id="grafico"></canvas>
+                                <script th:inline="javascript">
+                                    var nombres = /*[[${grafico.![nombreCompleto]}]]*/ [];
+                                    var cedulas = /*[[${grafico.![cedula]}]]*/ [];
+                                    var montosAyuda = /*[[${grafico.![montoAyuda]}]]*/ [];
+
+                                    var ctx = document.getElementById('grafico').getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: cedulas, // Usamos las cédulas como etiquetas
+                                            datasets: [{
+                                                    label: 'Monto de Ayuda según Ley 9188',
+                                                    data: montosAyuda,
+                                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
                                             },
-                                            options: {
-                                                scales: {
-                                                    y: {
-                                                        beginAtZero: true
-                                                    }
-                                                },
-                                                plugins: {
-                                                    tooltip: {
-                                                        callbacks: {
-                                                            title: function (tooltipItems) {
-                                                                return nombres[tooltipItems[0].dataIndex]; // Mostrar nombre completo como título del tooltip
-                                                            },
-                                                            label: function (tooltipItem) {
-                                                                return 'Monto Ayuda: ' + montosAyuda[tooltipItem.dataIndex];
-                                                            }
+                                            plugins: {
+                                                tooltip: {
+                                                    callbacks: {
+                                                        title: function (tooltipItems) {
+                                                            return nombres[tooltipItems[0].dataIndex]; // Mostrar nombre completo como título del tooltip
+                                                        },
+                                                        label: function (tooltipItem) {
+                                                            return 'Monto Ayuda: ' + montosAyuda[tooltipItem.dataIndex];
                                                         }
                                                     }
                                                 }
                                             }
-                                        });
-                                    </script>
+                                        }
+                                    });
+                                </script>
 
 
-                                    <h1>ACTIVIDADES</h1>
-                                    <div class="col-md-6">
+                                <h2 class="mt-4 text-center">Reportes actividades</h2>
+                                <hr/>
+                                <div class="col-md-6">
 
-                                        <div class="card m-2">
-                                            <div class="card-header">
-                                                <h4>Resumen de Actividades por Organización y Año</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table id="actividadResumenTable" class="table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Organización</th>
-                                                                <th>Año</th>
-                                                                <th>Cantidad de Actividades</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr th:each="actividad : ${CantActXOrg}">
-                                                                <td th:text="${actividad[0]}"></td>
-                                                                <td th:text="${actividad[1]}"></td>
-                                                                <td th:text="${actividad[2]}"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="  card m-2">
-                                            <div class="card-header">
-                                                <h4>Resumen de Actividades por Año y Tipo</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table id="actividadResumenTable" class="table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Año</th>
-                                                                <th>Tipo de Actividad</th>
-                                                                <th>Cantidad de Actividades</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr th:each="actividad2 : ${ActividadResumenByYearAndTipo}">
-                                                                <td th:text="${actividad2[0]}"></td>
-                                                                <td th:text="${actividad2[1]}"></td>
-                                                                <td th:text="${actividad2[2]}"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>Promedio de Participantes por Tipo de Actividad</h4>
+                                    <div class=" m-2">
+                                        <div class=" p-2 rounded " style="background-color: peru;
+                                             color: white;">
+                                            <h4>Resumen de Actividades por Organización y Año</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
-                                                <table id="actividadPromediosTable" class="table table-striped table-hover">
-                                                    <thead>
+                                                <table id="totalesHyMTable" class="table  table-hover mt-4 " style='background-color: peru'>
+                                                    <thead class='text-white'>
                                                         <tr>
-                                                            <th>Tipo de Actividad</th>
-                                                            <th>Promedio Niños 0-5</th>
-                                                            <th>Promedio Niños 5-12</th>
-                                                            <th>Promedio Adolescentes</th>
-                                                            <th>Promedio Adulto Hombre</th>
-                                                            <th>Promedio Adulto Mujer</th>
-                                                            <th>Promedio Personas Mayores 65</th>
+                                                            <th>Organización</th>
+                                                            <th>Año</th>
+                                                            <th>Cantidad de Actividades</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr th:each="actividad3 : ${AverageParticipants}">
-                                                            <td th:text="${actividad3[0]}"></td>
-                                                            <td th:text="${actividad3[1]}"></td>
-                                                            <td th:text="${actividad3[2]}"></td>
-                                                            <td th:text="${actividad3[3]}"></td>
-                                                            <td th:text="${actividad3[4]}"></td>
-                                                            <td th:text="${actividad3[5]}"></td>
-                                                            <td th:text="${actividad3[6]}"></td>
+                                                    <tbody style='background-color: white'>
+                                                        <tr th:each="actividad : ${CantActXOrg}">
+                                                            <td th:text="${actividad[0]}"></td>
+                                                            <td th:text="${actividad[1]}"></td>
+                                                            <td th:text="${actividad[2]}"></td>
                                                         </tr>
                                                     </tbody>
-
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="   m-2">
+                                        <div class=" p-2 rounded " style="background-color: peru;
+                                             color: white;">
+                                            <h4>Resumen de Actividades por Año y Tipo</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="totalesHyMTable" class="table  table-hover mt-4 " style='background-color: peru'>
+                                                    <thead class='text-white'>
+                                                        <tr>
+                                                            <th>Año</th>
+                                                            <th>Tipo de Actividad</th>
+                                                            <th>Cantidad de Actividades</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style='background-color: white'>
+                                                        <tr th:each="actividad2 : ${ActividadResumenByYearAndTipo}">
+                                                            <td th:text="${actividad2[0]}"></td>
+                                                            <td th:text="${actividad2[1]}"></td>
+                                                            <td th:text="${actividad2[2]}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="">
+                                    <div class=" p-2 rounded " style="background-color: peru;
+                                         color: white;">
+                                        <h4>Promedio de Participantes por Tipo de Actividad</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="totalesHyMTable" class="table  table-hover mt-4 " style='background-color: peru'>
+                                                <thead class='text-white'>
+                                                    <tr>
+                                                        <th>Tipo de Actividad</th>
+                                                        <th>Promedio Niños 0-5</th>
+                                                        <th>Promedio Niños 5-12</th>
+                                                        <th>Promedio Adolescentes</th>
+                                                        <th>Promedio Adulto Hombre</th>
+                                                        <th>Promedio Adulto Mujer</th>
+                                                        <th>Promedio Personas Mayores 65</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style='background-color: white'>
+                                                    <tr th:each="actividad3 : ${AverageParticipants}">
+                                                        <td th:text="${actividad3[0]}"></td>
+                                                        <td th:text="${actividad3[1]}"></td>
+                                                        <td th:text="${actividad3[2]}"></td>
+                                                        <td th:text="${actividad3[3]}"></td>
+                                                        <td th:text="${actividad3[4]}"></td>
+                                                        <td th:text="${actividad3[5]}"></td>
+                                                        <td th:text="${actividad3[6]}"></td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-            </section>
 
+                </div>
+             </div>
+        </section>
 
-            <section th:fragment="exito" style="overflow: auto;
-                     height: 80vh;">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header bg-success text-white">
-                                    <h5 class="card-title">¡Actividad Agregada Correctamente!</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p>Su actividad ha sido registrada exitosamente.</p>
-                                    <p>Será redirigido al inicio en unos segundos...</p>
-                                </div>
+        <section th:fragment="exito" style="overflow: auto;
+                 height: 80vh;">
+            <div class="container">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="card-title">¡Actividad Agregada Correctamente!</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Su actividad ha sido registrada exitosamente.</p>
+                                <p>Será redirigido al inicio en unos segundos...</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script>
-                    setTimeout(function () {
-                        window.location.href = "/";
-                    }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
-                </script>
-            </section>
-            <footer style="width: 100%;
-                    background-color: #d1b3ff" class=" text-white mt-5 p-2">
-                        <div  class="container">
-                            <div class="col">
-                                <p class=" m-0 lead text-center">
-                                    &COPY; [[#{plantilla.derechos}]]
-                                </p>
-                            </div>
-                        </div>
-                    </footer>
-            </body>
+            </div>
+            <script>
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
+            </script>
+        </section>
 
-        </html>
+        <section th:fragment='boton'>
+            <!-- Botón flotante -->
+            <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <!-- Inicialización de DataTables -->
+            <script>
+                // Obtén el botón
+                var backToTopBtn = document.getElementById("backToTopBtn");
+
+// Cuando el usuario se desplaza hacia abajo 20px desde la parte superior del documento, muestra el botón
+                window.onscroll = function () {
+                    scrollFunction();
+                };
+
+                function scrollFunction() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        backToTopBtn.style.display = "block";
+                    } else {
+                        backToTopBtn.style.display = "none";
+                    }
+                }
+
+// Cuando el usuario hace clic en el botón, vuelve al inicio de la página
+                function topFunction() {
+                    document.body.scrollTop = 0; // Para Safari
+                    document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+                }
+                $(document).ready(function () {
+                    $('#beneficiadosTable').DataTable({
+
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                        }
+                    });
+                });
+            </script>
+        </section>
+
+        <footer style="width: 100%"
+                class=" text-white mt-5 p-2">
+            <div  class="container">
+                <div class="col">
+                    <p class=" m-0 lead text-center">
+                        &COPY; [[#{plantilla.derechos}]]
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>

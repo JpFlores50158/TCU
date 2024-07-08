@@ -1,27 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/springframework/Controller.java to edit this template
- */
 package com.TCU.controller;
-
 import com.TCU.domain.Actividad;
-
 import com.TCU.service.ActividadService;
 import jakarta.servlet.http.HttpSession;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-/**
- *
- * @author jp09f
- */
 @Controller
 @RequestMapping("/actividad")
 public class ActividadController {
@@ -59,12 +46,13 @@ public class ActividadController {
     public String guardar(Actividad actividad, HttpSession httpSession) {
 
         String idUsuario = (String)  httpSession.getAttribute("Usuario");
-
+        actividadService.save(actividad);
 
         if (idUsuario == null) {
+             
             return "redirect:/actividad/exito"; 
         }
-        actividadService.save(actividad);
+        
 
         return "redirect:/actividad/listado";
     }

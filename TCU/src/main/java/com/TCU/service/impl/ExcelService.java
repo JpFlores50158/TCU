@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.TCU.service.impl;
 
 import com.TCU.domain.Ayuda;
@@ -25,7 +22,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import static org.springframework.web.servlet.function.RequestPredicates.headers;
+
 
 /**
  *

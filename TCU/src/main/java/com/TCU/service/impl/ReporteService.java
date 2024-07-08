@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.TCU.service.impl;
 
 import com.TCU.dao.ActividadDao;
@@ -11,9 +8,7 @@ import com.TCU.dao.PromedioEdadDecadaDao;
 import com.TCU.domain.Actividad;
 import com.TCU.domain.Ayuda;
 import com.TCU.domain.Grafico;
-
 import com.TCU.domain.PromedioEdadDecada;
-import com.TCU.service.ActividadService;
 import com.TCU.service.AyudaService;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -21,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-import org.hibernate.engine.jdbc.Size;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

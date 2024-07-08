@@ -1,11 +1,9 @@
 package com.TCU.service.impl;
 
 import com.TCU.dao.UsuarioDao;
-import com.TCU.domain.Rol;
 import com.TCU.domain.Usuario;
 import com.TCU.service.UsuarioDetailsService;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

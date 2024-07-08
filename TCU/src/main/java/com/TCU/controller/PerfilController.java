@@ -1,21 +1,16 @@
 package com.TCU.controller;
 
 import com.TCU.dao.UsuarioDao;
-
 import com.TCU.domain.Usuario;
-
 import com.TCU.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
