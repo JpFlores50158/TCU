@@ -55,6 +55,11 @@ public class AdminController {
         Rol nuevoRol = rolService.obtenerRolPorId(usuario.getRol().getIdRol());
         usuario.setRol(nuevoRol);
          usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
+         usuario.setCorreo(".");
+         usuario.setNombreUsuario(".");
+         usuario.setPrimerApellido(".");
+         usuario.setSegundoApellido(".");
+        usuario.setTelefono("0");
         usuarioService.save(usuario);
 
         return "redirect:/admin/usuarios/listado";
@@ -75,7 +80,11 @@ public class AdminController {
             usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
         }
 
-     
+     usuario.setCorreo(".");
+         usuario.setNombreUsuario(".");
+         usuario.setPrimerApellido(".");
+         usuario.setSegundoApellido(".");
+        usuario.setTelefono("0");
         usuarioService.save(usuario);
 
         return "redirect:/admin/usuarios/listado";
